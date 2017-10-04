@@ -17,13 +17,16 @@ public class Pedido
 	@JsonProperty(value="menus")
 	private List<Menu> menus;
 	
-	
 	@JsonProperty(value="usuario")
 	private Usuario usuario;
 	
 	@JsonProperty(value="productos")
 	private List<Producto> productos;
 	
+	@JsonProperty(value="idUsuario")
+	private Long idUsuario;
+	
+
 
 
 
@@ -34,9 +37,16 @@ public class Pedido
 		this.menus = menus;
 		this.usuario=usuario;
 		this.productos = productos;
-		
-		
 	}
+	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")Date fecha, @JsonProperty(value="idUsuario")Long idUsuario) {
+		super();
+		this.id=id;
+		this.fecha=fecha;
+		this.idUsuario =idUsuario;
+	}
+		
+		
+	
 
 	public Long getId() {
 		return id;
@@ -60,6 +70,7 @@ public class Pedido
 		this.fecha = fecha;
 	}
 
+
 	public List<Menu> getMenus() {
 		return menus;
 	}
@@ -70,7 +81,7 @@ public class Pedido
 	
 	
 	
-	public Long getIdUsuario()
+	public Long getIdUsuarioX()
 	{
 		if(usuario!=null)
 		{
@@ -93,6 +104,16 @@ public class Pedido
 
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) 
+	{
+		this.idUsuario = idUsuario;
+
 	}
 
 

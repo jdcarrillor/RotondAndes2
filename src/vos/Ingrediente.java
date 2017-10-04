@@ -20,94 +20,65 @@ public class Ingrediente
 	@JsonProperty(value="traduccion")
 	private String traduccion;
 	
-	@JsonProperty(value="equivalentes")
-	private List<Ingrediente> equivalentes;
-	
-	@JsonProperty(value="productos")
-	private List<Producto> productos;
 
 
-
-	public Ingrediente(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccion")String traduccion,@JsonProperty(value="equivalentes")List<Ingrediente> equivalentes,@JsonProperty(value="productos")List<Producto>productos) {
+	public Ingrediente(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccion")String traduccion) {
 		super();
 		this.id=id;
 		this.nombre=nombre;
 		this.descripcion=descripcion;
 		this.traduccion=traduccion;
-		this.equivalentes=equivalentes;
-		this.productos=productos;
 		
 	}
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
 
-	private String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
 
 
-	private void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 
 
-	private String getDescripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
 
 
 
-	private void setDescripcion(String descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
 
 
-	private String getTraduccion() {
+	public String getTraduccion() {
 		return traduccion;
 	}
 
 
 
-	private void setTraduccion(String traduccion) {
+	public void setTraduccion(String traduccion) {
 		this.traduccion = traduccion;
 	}
 
 
 
-	private List<Ingrediente> getEquivalentes() {
-		return equivalentes;
-	}
-
-
-
-	private void setEquivalentes(List<Ingrediente> equivalentes) {
-		this.equivalentes = equivalentes;
-	}
-
-
-
-	private List<Producto> getProductos() {
-		return productos;
-	}
-
-
-
-	private void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
 }
 
 	

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import vos.Menu;
 import vos.Pedido;
@@ -19,7 +20,7 @@ public class DAOTablaMenu
 	
 	public DAOTablaPedido pedido;
 	
-	public DAOTablaRestaurante restaurante;		
+			
 	
 	/**
 	 * Clase DAO que se conecta la base de datos usando JDBC para resolver los requerimientos de la aplicación
@@ -30,12 +31,12 @@ public class DAOTablaMenu
 		/**
 		 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
 		 */
-		private ArrayList<Object> recursos;
+		private  ArrayList<Object> recursos;
 
 		/**
 		 * Atributo que genera la conexión a la base de datos
 		 */
-		private Connection conn;
+		private  Connection conn;
 
 		/**
 		 * Metodo constructor que crea DAOVideo
@@ -76,7 +77,7 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public ArrayList<Menu> darMenus() throws SQLException, Exception {
+		public  ArrayList<Menu> darMenus() throws SQLException, Exception {
 			ArrayList<Menu> menus = new ArrayList<Menu>();
 
 			String sql = "SELECT * FROM MENU";
@@ -91,15 +92,16 @@ public class DAOTablaMenu
 				double precio = rs.getDouble("PRECIO");
 				Long idRestaurante = rs.getLong("ID_RESTAURANTE");
 				Long idPedido= rs.getLong("ID_PEDIDO");
-				Restaurante restauranteBuscado = restaurante.buscarRestaurantePorId(idRestaurante);
-				Pedido pedidoBuscado = pedido.buscarPedidoPorId(idPedido);
 				
-				menus.add(new Menu(id, costo, precio, null, null, null));
+				
+				menus.add(new Menu(id, costo, precio, idRestaurante, idPedido));
 				
             
 			}
 			return menus;
 		}
+		
+		
 		
 		/**
 		 * Metodo que busca el video con el id que entra como parametro.
@@ -125,7 +127,7 @@ public class DAOTablaMenu
 				Long idRestaurante = rs.getLong("ID_RESTAURANTE");
 				Long idPedido= rs.getLong("ID_PEDIDO");
 				
-				menu=(new Menu(id2, costo, precio, null, null, null));
+				menu=(new Menu(id2, costo, precio, idRestaurante, idPedido));
 				
 			}
 
@@ -146,9 +148,9 @@ public class DAOTablaMenu
 			String sql = "INSERT INTO MENU VALUES (";
 			sql += menu.getId() + ",'";
 			sql += menu.getcosto()+ "',";
-			sql += menu.getprecio()+ "',";
-			sql += menu.getIdRestaruarnte()+ "',";
-			sql += menu.getIdPedido() + ")";
+			sql += menu.getprecio()+ ",'";
+			sql += menu.getId_restaurante()+ "',";
+			sql += menu.getId_pedido() + ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -170,8 +172,8 @@ public class DAOTablaMenu
 			String sql = "UPDATE MENU SET ";
 			sql += "COSTO='" + menu.getcosto()+ "',";
 			sql += "PRECIO='" + menu.getprecio()+ "',";
-			sql += "ID_RESTAURANTE='" + menu.getIdRestaruarnte()+ "',";
-			sql += "ID_PEDIDO=" + menu.getIdPedido();
+			sql += "ID_RESTAURANTE='" + menu.getId_restaurante()+ "',";
+			sql += "ID_PEDIDO=" + menu.getId_pedido();
 			sql += " WHERE ID = " + menu.getId();
 
 
@@ -199,7 +201,10 @@ public class DAOTablaMenu
 		}
 		
 		
-
+		public static void main(String [ ] args) throws SQLException, Exception
+		{
+		   
+		}
 
 		
 	

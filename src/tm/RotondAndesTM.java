@@ -16,13 +16,18 @@ import dao.DAOTablaProducto;
 import dao.DAOTablaRestaurante;
 import dao.DAOTablaTipo;
 import dao.DAOTablaUsuario;
+
 import vos.Ingrediente;
 import vos.Menu;
 import vos.Pedido;
 import vos.Producto;
 import vos.Restaurante;
+
+import vos.Video;
+
 import vos.Tipo;
 import vos.Usuario;
+
 
 
 public class RotondAndesTM 
@@ -183,6 +188,199 @@ public class RotondAndesTM
 			}
 		}
 		return menus;
+	}
+	
+	/**
+	 * Metodo que modela la transaccion que busca el video en la base de datos con el id que entra como parametro.
+	 * @param name - Id del video a buscar. name != null
+	 * @return Video - Resultado de la busqueda
+	 * @throws Exception -  cualquier error que se genere durante la transaccion
+	 */
+	public Menu buscarMenuPorId(Long id) throws Exception {
+		Menu menu;
+		DAOTablaMenu daoMenus = new DAOTablaMenu();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoMenus.setConn(conn);
+			menu = daoMenus.buscarMenuPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoMenus.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return menu;
+	}
+	
+	/**
+	 * Metodo que modela la transaccion que agrega un solo video a la base de datos.
+	 * <b> post: </b> se ha agregado el video que entra como parametro
+	 * @param video - el video a agregar. video != null
+	 * @throws Exception - cualquier error que se genere agregando el video
+	 */
+	public void addMenu(Menu menu) throws Exception {
+		DAOTablaMenu daoMenus = new DAOTablaMenu();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoMenus.setConn(conn);
+			daoMenus.addMenu(menu);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoMenus.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	
+	/**
+	 * Metodo que modela la transaccion que agrega los videos que entran como parametro a la base de datos.
+	 * <b> post: </b> se han agregado los videos que entran como parametro
+	 * @param videos - objeto que modela una lista de videos y se estos se pretenden agregar. videos != null
+	 * @throws Exception - cualquier error que se genera agregando los videos
+	 */
+	public void addMenus(List<Menu> menus) throws Exception {
+		DAOTablaMenu daoMenus = new DAOTablaMenu();
+		try 
+		{
+			//////transaccion - ACID Example
+			this.conn = darConexion();
+			conn.setAutoCommit(false);
+			daoMenus.setConn(conn);
+			Iterator<Menu> it = menus.iterator();
+			while(it.hasNext())
+			{
+				daoMenus.addMenu(it.next());
+			}
+			
+			conn.commit();
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} finally {
+			try {
+				daoMenus.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	
+	/**
+	 * Metodo que modela la transaccion que actualiza el video que entra como parametro a la base de datos.
+	 * <b> post: </b> se ha actualizado el video que entra como parametro
+	 * @param video - Video a actualizar. video != null
+	 * @throws Exception - cualquier error que se genera actualizando los videos
+	 */
+	public void updateMenu(Menu menu) throws Exception {
+		DAOTablaMenu daoMenus= new DAOTablaMenu();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoMenus.setConn(conn);
+			daoMenus.updateMenu(menu);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoMenus.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+
+	/**
+	 * Metodo que modela la transaccion que elimina el video que entra como parametro a la base de datos.
+	 * <b> post: </b> se ha eliminado el video que entra como parametro
+	 * @param video - Video a eliminar. video != null
+	 * @throws Exception - cualquier error que se genera actualizando los videos
+	 */
+	public void deleteMenu(Menu menu) throws Exception {
+		DAOTablaMenu daoMenus = new DAOTablaMenu();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoMenus.setConn(conn);
+			daoMenus.deleteMenu(menu);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoMenus.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 

@@ -1,13 +1,18 @@
-package vos;
+	package vos;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+
+import dao.DAOTablaRestaurante;
 
 public class Menu 
 
 
 {
+	
+	
 
 	@JsonProperty(value="id")
 	private Long id;
@@ -18,28 +23,26 @@ public class Menu
 	@JsonProperty(value="precio")
 	private double precio;
 	
-	@JsonProperty(value="restaurante")
-	private Restaurante restaurante;
+	@JsonProperty(value="id_restaurante")
+	private Long id_restaurante;
 	
-	@JsonProperty(value="productos")
-	private List<Producto> productos;
+	@JsonProperty(value="id_pedido")
+	private Long id_pedido;
 	
-	@JsonProperty(value="pedido")
-	private Pedido pedido;
+	
 	
 	//Peniente MenuDefinido
 
 
 
 
-	public Menu(@JsonProperty(value="id")Long id,@JsonProperty(value="costo")double costo,@JsonProperty(value="precio")double precio,@JsonProperty(value="restaurante")Restaurante restaurante,@JsonProperty(value="pedido")Pedido pedido,@JsonProperty(value="productos")List<Producto>productos) {
+	public Menu(@JsonProperty(value="id")Long id,@JsonProperty(value="costo")double costo,@JsonProperty(value="precio")double precio,@JsonProperty(value="id_restaurante")Long id_restaurante,@JsonProperty(value="id_pedido")Long id_pedido) {
 		super();
 		this.id=id;
 		this.costo=costo;
 		this.precio=precio;
-		this.restaurante=restaurante;
-		this.productos=productos;
-		this.pedido=pedido;
+		this.id_restaurante=id_restaurante;
+		this.id_pedido=id_pedido;
 		
 		
 	}
@@ -79,55 +82,24 @@ public class Menu
 		this.precio = precio;
 	}
 
+	public Long getId_restaurante() {
+		return id_restaurante;
+	}
 
+	public void setId_restaurante(Long id_restaurante) {
+		this.id_restaurante = id_restaurante;
+	}
 
-	public Restaurante getrestaurante() {
-		return restaurante;
+	public Long getId_pedido() {
+		return id_pedido;
+	}
+
+	public void setId_pedido(Long id_pedido) {
+		this.id_pedido = id_pedido;
 	}
 
 
 
-	public void setrestaurante(Restaurante restaurante) {
-		this.restaurante = restaurante;
-	}
-
-
-
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-	
-	public Long getIdRestaruarnte()
-	{
-		if(restaurante!=null)
-		{
-		return this.restaurante.getId();
-		}
-		return null;
-	}
-	
-	public Long getIdPedido()
-	{
-		if(pedido!=null)
-		{
-		return pedido.getId();
-		}
-		return null;
-	}
 	
 	
 }

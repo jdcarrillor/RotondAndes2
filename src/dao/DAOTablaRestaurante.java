@@ -110,11 +110,11 @@ public class DAOTablaRestaurante
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			ResultSet rs = prepStmt.executeQuery();
+			if(rs!=null){
 
 			if(rs.next()) {
 				Long id2 = rs.getLong("ID");
 				String name = rs.getString("NOMBRE");
-				
 				String representante = rs.getString("REPRESENTANTE");
 				String tipo_comida = rs.getString("TIPO_COMIDA");
 				Long id_zona = rs.getLong("ID_ZONA");
@@ -124,6 +124,7 @@ public class DAOTablaRestaurante
 				
 				
 				
+			}
 			}
 
 			return restaurante;

@@ -81,7 +81,7 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENU");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, null));
 		}
 		return productos;
 	}
@@ -114,7 +114,7 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENU");
-			productos.add(new Producto(id, nombre2, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			productos.add(new Producto(id, nombre2, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, null));
 	
 		}
 
@@ -149,7 +149,7 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENU");
-			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu);
+			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, null);
 	
 		}
 

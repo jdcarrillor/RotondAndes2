@@ -29,32 +29,32 @@ public class Tipo {
 	}
 
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
-	private String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
 
-	private void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 
-	private List<Producto> getProductos() {
+	public List<Producto> getProductos() {
 		return productos;
 	}
 
 
-	private void setProductos(List<Producto> productos) {
+	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 	

@@ -1,6 +1,7 @@
 package vos;
 
 import java.util.Date;
+import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -13,49 +14,85 @@ public class Pedido
 	private Date fecha;
 	
 
-	@JsonProperty(value="menu")
-	private Menu menu;
+	@JsonProperty(value="menus")
+	private List<Menu> menus;
+	
+	
+	@JsonProperty(value="usuario")
+	private Usuario usuario;
+	
+	@JsonProperty(value="productos")
+	private List<Producto> productos;
 	
 
 
 
-	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")Date fecha, @JsonProperty(value="menu")Menu menu) {
+	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")Date fecha, @JsonProperty(value="menus")List<Menu> menus, @JsonProperty(value="usuario")Usuario usuario, @JsonProperty(value="productos")List<Producto> productos) {
 		super();
 		this.id=id;
 		this.fecha=fecha;
-		this.setMenu(menu);
+		this.menus = menus;
+		this.usuario=usuario;
+		this.productos = productos;
 		
 		
 	}
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
 
-	private Date getfecha() {
+	public Date getfecha() {
 		return fecha;
 	}
 
 
 
-	private void setfecha(Date fecha) {
+	public void setfecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-	private Menu getMenu() {
-		return menu;
+	public List<Menu> getMenus() {
+		return menus;
 	}
 
-	private void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
+	
+	
+	
+	public Long getIdUsuario()
+	{
+		if(usuario!=null)
+		{
+			return usuario.getId();
+		}
+		return null;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
 	}
 
 

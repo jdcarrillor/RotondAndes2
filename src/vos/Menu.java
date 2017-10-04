@@ -44,70 +44,90 @@ public class Menu
 		
 	}
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
 
 
-	private double getcosto() {
+	public double getcosto() {
 		return costo;
 	}
 
 
 
-	private void setcosto(double costo) {
+	public void setcosto(double costo) {
 		this.costo = costo;
 	}
 
 
 
-	private double getprecio() {
+	public double getprecio() {
 		return precio;
 	}
 
 
 
-	private void setprecio(double precio) {
+	public void setprecio(double precio) {
 		this.precio = precio;
 	}
 
 
 
-	private Restaurante getrestaurante() {
+	public Restaurante getrestaurante() {
 		return restaurante;
 	}
 
 
 
-	private void setrestaurante(Restaurante restaurante) {
+	public void setrestaurante(Restaurante restaurante) {
 		this.restaurante = restaurante;
 	}
 
 
 
-	private List<Producto> getProductos() {
+	public List<Producto> getProductos() {
 		return productos;
 	}
 
 
 
-	private void setProductos(List<Producto> productos) {
+	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
-	private Pedido getPedido() {
+	public Pedido getPedido() {
 		return pedido;
 	}
 
-	private void setPedido(Pedido pedido) {
+	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+	
+	public Long getIdRestaruarnte()
+	{
+		if(restaurante!=null)
+		{
+		return this.restaurante.getId();
+		}
+		return null;
+	}
+	
+	public Long getIdPedido()
+	{
+		if(pedido!=null)
+		{
+		return pedido.getId();
+		}
+		return null;
+	}
+	
+	
 }

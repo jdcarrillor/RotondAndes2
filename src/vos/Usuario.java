@@ -34,52 +34,52 @@ public class Usuario {
 	}
 
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
-	private String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
 
-	private void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 
-	private String getRol() {
+	public String getRol() {
 		return rol;
 	}
 
 
-	private void setRol(String rol) {
+	public void setRol(String rol) {
 		this.rol = rol;
 	}
 
 
-	private Pedido getPedido() {
+	public Pedido getPedido() {
 		return pedido;
 	}
 
 
-	private void setPedido(Pedido pedido) {
+	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
 
 
-	private RotondAndes getRotondAndes() {
+	public RotondAndes getRotondAndes() {
 		return rotondAndes;
 	}
 
 
-	private void setRotondAndes(RotondAndes rotondAndes) {
+	public void setRotondAndes(RotondAndes rotondAndes) {
 		this.rotondAndes = rotondAndes;
 	}
 	

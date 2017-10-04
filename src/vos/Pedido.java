@@ -13,49 +13,49 @@ public class Pedido
 	private Date fecha;
 	
 
-	@JsonProperty(value="menu")
-	private Menu menu;
+	@JsonProperty(value="idUsuario")
+	private Long idUsuario;
 	
 
 
 
-	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")Date fecha, @JsonProperty(value="menu")Menu menu) {
+	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")Date fecha, @JsonProperty(value="idUsuario")Long idUsuario) {
 		super();
 		this.id=id;
 		this.fecha=fecha;
-		this.setMenu(menu);
+		this.idUsuario =idUsuario;
 		
 		
 	}
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
 
-	private Date getfecha() {
+	public Date getfecha() {
 		return fecha;
 	}
 
 
 
-	private void setfecha(Date fecha) {
+	public void setfecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-	private Menu getMenu() {
-		return menu;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 
-	private void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 

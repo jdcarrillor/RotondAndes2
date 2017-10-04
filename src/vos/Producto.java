@@ -21,14 +21,11 @@ public class Producto
 	@JsonProperty(value="descripcion")
 	private String descripcion;
 	
-	@JsonProperty(value="pedidos")
-	private List<Pedido> pedidos;
-	
 	@JsonProperty(value="traduccion")
 	private String traduccion;
 	
-	@JsonProperty(value="tiempoPreparacion")
-	private double tiempoPreparacion;
+	@JsonProperty(value="tiempo")
+	private double tiempo;
 	
 	@JsonProperty(value="categoria")
 	private String categoria;
@@ -36,17 +33,8 @@ public class Producto
 	@JsonProperty(value="disponibles")
 	private int disponibles;
 	
-	@JsonProperty(value="equivalentes")
-	private List<Producto> equivalentes;
-	
-	@JsonProperty(value="tipo")
-	private Tipo tipo;
-	
-	@JsonProperty(value="ingredientes")
-	private List<Ingrediente> ingredientes;
-	
 	@JsonProperty(value="menu")
-	private Menu menu;
+	private Long menu;
 	
 
 	
@@ -62,146 +50,113 @@ public class Producto
 
 
 
-	public Producto(@JsonProperty(value="id")Long id, @JsonProperty(value="nombreProducto")String nombreProducto,@JsonProperty(value="costoProduccion")double costoProduccion,@JsonProperty(value="precio")double precio,@JsonProperty(value="tiempoPreparacion")double tiempoPreparacion,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="pedidos")List<Pedido>pedidos,@JsonProperty(value="traduccion")String traduccion,@JsonProperty(value="categoria")String categoria,@JsonProperty(value="disponibles")int disponibles,@JsonProperty(value="equivalentes")List<Producto>equivalentes) {
+	public Producto(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombreProducto,@JsonProperty(value="costoProduccion")double costoProduccion,@JsonProperty(value="precio")double precio,@JsonProperty(value="tiempo")double tiempo,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccion")String traduccion,@JsonProperty(value="categoria")String categoria,@JsonProperty(value="disponibles")int disponibles, @JsonProperty(value="id_menu")Long menu) {
 		super();
 		this.id=id;
 		this.nombreProducto=nombreProducto;
 		this.costoProduccion=costoProduccion;
 		this.precio=precio;
-		this.setDescripcion(descripcion);
-		this.setPedidos(pedidos);
-		this.setTraduccion(traduccion);
-		this.setTiempoPreparacion(tiempoPreparacion);
-		this.setCategoria(categoria);
-		this.setDisponibles(disponibles);
-		this.setEquivalentes(equivalentes);
+		this.descripcion = descripcion;
+		this.traduccion = traduccion;
+		this.tiempo = tiempo;
+		this.categoria = categoria;
+		this.disponibles = disponibles;
+		this.menu = menu;
 		
 		
 	}
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
 
-	private String getnombreProducto() {
+	public String getNombreProducto() {
 		return nombreProducto;
 	}
 
 
 
-	private void setnombreProducto(String nombreProducto) {
+	public void setNombreProducto(String nombreProducto) {
 		this.nombreProducto = nombreProducto;
 	}
 
 
 
-	private double getcostoProduccion() {
+	public double getCostoProduccion() {
 		return costoProduccion;
 	}
 
 
 
-	private void setcostoProduccion(double costoProduccion) {
+	public void setCostoProduccion(double costoProduccion) {
 		this.costoProduccion = costoProduccion;
 	}
 
 
 
-	private double getprecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
 
 
-	private void setprecio(double precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
-	private String getDescripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
 
-	private void setDescripcion(String descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-	private List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	private void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
-	private String getTraduccion() {
+	public String getTraduccion() {
 		return traduccion;
 	}
 
-	private void setTraduccion(String traduccion) {
+	public void setTraduccion(String traduccion) {
 		this.traduccion = traduccion;
 	}
 
-	private double getTiempoPreparacion() {
-		return tiempoPreparacion;
+	public double getTiempo() {
+		return tiempo;
 	}
 
-	private void setTiempoPreparacion(double tiempoPreparacion) {
-		this.tiempoPreparacion = tiempoPreparacion;
+	public void setTiempo(double tiempo) {
+		this.tiempo = tiempo;
 	}
 
-	private String getCategoria() {
+	public String getCategoria() {
 		return categoria;
 	}
 
-	private void setCategoria(String categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 
-	private int getDisponibles() {
+	public int getDisponibles() {
 		return disponibles;
 	}
 
-	private void setDisponibles(int disponibles) {
+	public void setDisponibles(int disponibles) {
 		this.disponibles = disponibles;
 	}
 
-	private List<Producto> getEquivalentes() {
-		return equivalentes;
-	}
-
-	private void setEquivalentes(List<Producto> equivalentes) {
-		this.equivalentes = equivalentes;
-	}
-
-	private Tipo getTipo() {
-		return tipo;
-	}
-
-	private void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
-
-	private List<Ingrediente> getIngredientes() {
-		return ingredientes;
-	}
-
-	private void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
-
-	private Menu getMenu() {
+	public Long getMenu() {
 		return menu;
 	}
 
-	private void setMenu(Menu menu) {
+	public void setMenu(Long menu) {
 		this.menu = menu;
 	}
 

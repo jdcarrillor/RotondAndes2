@@ -15,14 +15,22 @@ import dao.DAOTablaPedido;
 import dao.DAOTablaProducto;
 import dao.DAOTablaRestaurante;
 
+
 import dao.DAOTablaVideos;
+
+
+import dao.DAOTablaTipo;
 
 import vos.Ingrediente;
 import vos.Menu;
 import vos.Pedido;
 import vos.Producto;
 import vos.Restaurante;
+
 import vos.Video;
+
+import vos.Tipo;
+
 
 
 public class RotondAndesTM 
@@ -1041,6 +1049,241 @@ public class RotondAndesTM
 		} finally {
 			try {
 				daoProductos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+
+	public List<Tipo> darTipos() throws Exception {
+		List<Tipo> Tipos;
+		DAOTablaTipo daoTipo = new DAOTablaTipo();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoTipo.setConn(conn);
+			Tipos = daoTipo.darTipos();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoTipo.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return Tipos;
+	}
+
+
+	public Tipo buscarTipoPorId(Long id) throws Exception {
+		Tipo Tipo;
+		DAOTablaTipo daoTipos = new DAOTablaTipo();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoTipos.setConn(conn);
+			Tipo = daoTipos.buscarTipoPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoTipos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return Tipo;
+	}
+
+
+	public List<Tipo> buscarTiposPorName(String nombre) throws Exception {
+		List<Tipo> Tipo;
+		DAOTablaTipo daoTipos = new DAOTablaTipo();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoTipos.setConn(conn);
+			Tipo = daoTipos.buscarTiposPorNombre(nombre);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoTipos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return Tipo;
+	}
+
+
+	public void addTipo(Tipo Tipo) throws Exception {
+		DAOTablaTipo daoTipos = new DAOTablaTipo();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoTipos.setConn(conn);
+			daoTipos.addTipo(Tipo);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoTipos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
+
+
+	public void addTipos(List<Tipo> Tipos) throws Exception {
+		DAOTablaTipo daoTipos = new DAOTablaTipo();
+		try 
+		{
+			//////transaccion - ACID Example
+			this.conn = darConexion();
+			conn.setAutoCommit(false);
+			daoTipos.setConn(conn);
+			Iterator<Tipo> it = Tipos.iterator();
+			while(it.hasNext())
+			{
+				daoTipos.addTipo(it.next());
+			}
+			
+			conn.commit();
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} finally {
+			try {
+				daoTipos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
+
+
+	public void updateTipo(Tipo Tipo) throws Exception {
+		DAOTablaTipo daoTipos = new DAOTablaTipo();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoTipos.setConn(conn);
+			daoTipos.updateTipo(Tipo);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoTipos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
+
+
+	public void deleteTipo(Tipo Tipo) throws Exception {
+		DAOTablaTipo daoTipos = new DAOTablaTipo();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoTipos.setConn(conn);
+			daoTipos.deleteTipo(Tipo);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoTipos.cerrarRecursos();
 				if(this.conn!=null)
 					this.conn.close();
 			} catch (SQLException exception) {

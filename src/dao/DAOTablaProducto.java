@@ -186,7 +186,7 @@ public class DAOTablaProducto {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el Pedido.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void updatePedido(Producto producto) throws SQLException, Exception {
+	public void updateProducto(Producto producto) throws SQLException, Exception {
 
 		String sql = "UPDATE Pedido SET ";
 		sql += "NOMBRE='" + producto.getNombreProducto() + "',";
@@ -214,7 +214,7 @@ public class DAOTablaProducto {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el Pedido.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void deletePedido(Producto producto) throws SQLException, Exception {
+	public void deleteProducto(Producto producto) throws SQLException, Exception {
 
 		String sql = "DELETE FROM PRODUCTO";
 		sql += " WHERE ID = " + producto.getId();

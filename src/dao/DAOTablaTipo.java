@@ -71,7 +71,7 @@ public class DAOTablaTipo {
 		while (rs.next()) {
 			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
-			tipos.add(new Tipo(id, nombre, null));
+			tipos.add(new Tipo(id, nombre));
 		}
 		return tipos;
 	}
@@ -96,7 +96,7 @@ public class DAOTablaTipo {
 		while (rs.next()) {
 			String nombre2 = rs.getString("NOMBRE");
 			Long id = rs.getLong("ID");
-			tipos.add(new Tipo(id, nombre2, null));
+			tipos.add(new Tipo(id, nombre2));
 		}
 
 		return tipos;
@@ -122,7 +122,7 @@ public class DAOTablaTipo {
 		if(rs.next()) {
 			String nombre = rs.getString("NOMBRE");
 			Long id2 = rs.getLong("ID");
-			tipo = new Tipo(id2, nombre, null);
+			tipo = new Tipo(id2, nombre);
 		}
 
 		return tipo;
@@ -139,7 +139,7 @@ public class DAOTablaTipo {
 	public void addTipo(Tipo Tipo) throws SQLException, Exception {
 
 		String sql = "INSERT INTO Tipo VALUES (";
-		sql += Tipo.getId() + ",'";
+		sql += Tipo.getId() + ",";
 		sql += Tipo.getNombre() ;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -159,7 +159,7 @@ public class DAOTablaTipo {
 	public void updateTipo(Tipo Tipo) throws SQLException, Exception {
 
 		String sql = "UPDATE Tipo SET ";
-		sql += "NOMBRE='" + Tipo.getNombre();
+		sql += "NOMBRE=" + Tipo.getNombre();
 		sql += " WHERE ID = " + Tipo.getId();
 
 

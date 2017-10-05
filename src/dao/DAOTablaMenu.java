@@ -16,9 +16,7 @@ import vos.Video;
 public class DAOTablaMenu 
 {
 	
-	public DAOTablaProducto producto;
 	
-	public DAOTablaPedido pedido;
 	
 			
 	
@@ -146,10 +144,10 @@ public class DAOTablaMenu
 		public void addMenu(Menu menu) throws SQLException, Exception {
 
 			String sql = "INSERT INTO MENU VALUES (";
-			sql += menu.getId() + ",'";
-			sql += menu.getcosto()+ "',";
-			sql += menu.getprecio()+ ",'";
-			sql += menu.getId_restaurante()+ "',";
+			sql += menu.getId() + ",";
+			sql += menu.getcosto()+ ",";
+			sql += menu.getprecio()+ ",";
+			sql += menu.getId_restaurante()+ ",";
 			sql += menu.getId_pedido() + ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -170,9 +168,9 @@ public class DAOTablaMenu
 		public void updateMenu(Menu menu) throws SQLException, Exception {
 
 			String sql = "UPDATE MENU SET ";
-			sql += "COSTO='" + menu.getcosto()+ "',";
-			sql += "PRECIO='" + menu.getprecio()+ "',";
-			sql += "ID_RESTAURANTE='" + menu.getId_restaurante()+ "',";
+			sql += "COSTO=" + menu.getcosto()+ ",";
+			sql += "PRECIO=" + menu.getprecio()+ ",";
+			sql += "ID_RESTAURANTE=" + menu.getId_restaurante()+ ",";
 			sql += "ID_PEDIDO=" + menu.getId_pedido();
 			sql += " WHERE ID = " + menu.getId();
 
@@ -200,12 +198,7 @@ public class DAOTablaMenu
 			prepStmt.executeQuery();
 		}
 		
-		
-		public static void main(String [ ] args) throws SQLException, Exception
-		{
-		   
-		}
-
+	
 		
 	
 	

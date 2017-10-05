@@ -20,9 +20,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
-import dao.DAOTablaAlquiler;
+
 import dao.DAOTablaVideos;
-import vos.Alquiler;
 import vos.Video;
 
 /**
@@ -154,37 +153,7 @@ public class VideoAndesTM {
 		return videos;
 	}
 	
-	public List<Alquiler> darAlquiler() throws Exception {
-		List<Alquiler> videos;
-		DAOTablaAlquiler daoVideos = new DAOTablaAlquiler();
-		try 
-		{
-			//////transaccion
-			this.conn = darConexion();
-			daoVideos.setConn(conn);
-			videos = daoVideos.darAlquileres();
-
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} finally {
-			try {
-				daoVideos.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-		return videos;
-	}
+	
 
 	/**
 	 * Metodo que modela la transaccion que busca el/los videos en la base de datos con el nombre entra como parametro.

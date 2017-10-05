@@ -12,16 +12,15 @@ public class Tipo {
 	@JsonProperty(value="nombre")
 	private String nombre;
 	
-	@JsonProperty(value="productos")
-	private List<Producto> productos;
 	
 	
-	public Tipo(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="productos")List<Producto> productos)
+	
+	public Tipo(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre)
 	{
 		super();
 		this.id=(id);
 		this.nombre=nombre;
-		this.productos=productos;
+		
 		
 	
 		
@@ -49,14 +48,6 @@ public class Tipo {
 	}
 
 
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
 	
 	
 	

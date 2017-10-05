@@ -16,23 +16,21 @@ public class Restaurante
 	@JsonProperty(value="representante")
 	private String representante;
 	
-	@JsonProperty(value="tipo_comida")
-	private String tipo_comida;
+	@JsonProperty(value="tipocomida")
+	private String tipocomida;
 	
-	@JsonProperty(value="id_zona")
-	private Long id_zona;
+	@JsonProperty(value="idzona")
+	private Long idzona;
 	
-	@JsonProperty(value="id_paginaweb")
-	private Long id_paginaweb;
 	
-	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="representante")String representante,@JsonProperty(value="tipo_comida")String tipo_comida,@JsonProperty(value="id_Zona")Long id_zona, @JsonProperty(value="id_paginaWeb")Long id_paginaweb ) {
+	
+	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="representante")String representante,@JsonProperty(value="tipocomida")String tipo_comida,@JsonProperty(value="idzona")Long id_zona ) {
 		super();
 		this.id=id;
 		this.nombre=nombre;
 		this.representante=representante;
-		this.tipo_comida=tipo_comida;
-		this.id_paginaweb=id_paginaweb;
-		this.id_zona= id_zona;
+		this.tipocomida=tipo_comida;
+		this.idzona= id_zona;
 	
 		
 		
@@ -80,13 +78,13 @@ public void setrepresentante(String representante) {
 
 
 public String gettipoComida() {
-	return tipo_comida;
+	return tipocomida;
 }
 
 
 
 public void settipoComida(String tipoComida) {
-	this.tipo_comida = tipoComida;
+	this.tipocomida = tipoComida;
 }
 
 
@@ -94,20 +92,14 @@ public void settipoComida(String tipoComida) {
 
 
 public Long getIdZona() {
-	return id_zona;
+	return idzona;
 }
 
 public void setIdZona(Long idZona) {
-	this.id_zona = idZona;
+	this.idzona = idZona;
 }
 
-public Long getIdPaginaWeb() {
-	return id_paginaweb;
-}
 
-public void setIdPaginaWeb(Long idPaginaWeb) {
-	this.id_paginaweb = idPaginaWeb;
-}
 
 	
 }

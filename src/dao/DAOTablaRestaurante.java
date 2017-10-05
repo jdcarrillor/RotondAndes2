@@ -79,9 +79,8 @@ public class DAOTablaRestaurante
 				Long id = rs.getLong("ID");
 				String representante= rs.getString("REPRESENTANTE");
 				String tipo_Comida= rs.getString("TIPO_COMIDA");
-				Long id_PaginaWeb= rs.getLong("ID_PAGINAWEB");
 				Long id_Zona=rs.getLong("ID_ZONA");
-				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona, id_PaginaWeb));
+				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona));
 				
             
 			}
@@ -116,9 +115,9 @@ public class DAOTablaRestaurante
 				String representante = rs.getString("REPRESENTANTE");
 				String tipo_comida = rs.getString("TIPO_COMIDA");
 				Long id_zona = rs.getLong("ID_ZONA");
-				Long id_paginaweb = rs.getLong("ID_PAGINAWEB");
 				
-				restaurante = new Restaurante(id2, name, representante, tipo_comida, id_zona, id_paginaweb);
+				
+				restaurante = new Restaurante(id2, name, representante, tipo_comida, id_zona);
 				
 				
 				
@@ -139,12 +138,11 @@ public class DAOTablaRestaurante
 		public void addRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
 			String sql = "INSERT INTO Restaurante VALUES (";
-			sql += restaurante.getId() + ",'";
-			sql += restaurante.getnombre() + "',";
-			sql += restaurante.getrepresentante() + "',";
-			sql += restaurante.gettipoComida() + "',";
-			sql += restaurante.getIdZona() + "',";
-			sql += restaurante.getIdPaginaWeb() + "',";
+			sql += restaurante.getId() + ",";
+			sql += restaurante.getnombre() + ",";
+			sql += restaurante.getrepresentante() + ",";
+			sql += restaurante.gettipoComida() + ",";
+			sql += restaurante.getIdZona() +  ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -163,11 +161,10 @@ public class DAOTablaRestaurante
 		public void updateRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
 			String sql = "UPDATE VIDEO SET ";
-			sql += "NOMBRE='" + restaurante.getnombre() + "',";
-			sql += "REPRESENTANTE=" + restaurante.getrepresentante()+ "',";
-			sql += "TIPO_COMIDA=" + restaurante.gettipoComida()+ "',";
-			sql += "ID_ZONA=" + restaurante.getIdZona()+ "',";
-			sql += "ID_PAGINAWEB=" + restaurante.getIdPaginaWeb()+ "',";
+			sql += "NOMBRE='" + restaurante.getnombre() + ",";
+			sql += "REPRESENTANTE=" + restaurante.getrepresentante()+ ",";
+			sql += "TIPO_COMIDA=" + restaurante.gettipoComida()+ ",";
+			sql += "ID_ZONA=" + restaurante.getIdZona();
 			sql += " WHERE ID = " + restaurante.getId();
 
 

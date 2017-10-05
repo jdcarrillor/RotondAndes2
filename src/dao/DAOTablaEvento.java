@@ -139,8 +139,8 @@ public class DAOTablaEvento
 		public void addEvento(Evento Evento) throws SQLException, Exception {
 
 			String sql = "INSERT INTO EVENTO VALUES (";
-			sql += Evento.getFecha()+ ",";
 			sql += Evento.getId() + ",";
+			sql += Evento.getFecha()+ ",";
 			sql += Evento.getNum_comensales()+ ",";
 			sql += Evento.getId_zona()+ ",";
 			sql += Evento.getId_usuarioCliente() + ")";

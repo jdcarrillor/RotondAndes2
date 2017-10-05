@@ -167,9 +167,9 @@ public class DAOTablaProducto {
 	public void addProducto(Producto producto) throws SQLException, Exception {
 
 		String sql = "INSERT INTO PRODUCTO VALUES (";
-		sql += producto.getId() + ",'";
-		sql += producto.getNombreProducto() + "',";
-		sql += producto.getDescripcion() + ",'";
+		sql += producto.getId() + ",";
+		sql += producto.getNombreProducto() + ",";
+		sql += producto.getDescripcion() + ",";
 		sql += producto.getTraduccion() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -189,14 +189,14 @@ public class DAOTablaProducto {
 	public void updateProducto(Producto producto) throws SQLException, Exception {
 
 		String sql = "UPDATE Pedido SET ";
-		sql += "NOMBRE='" + producto.getNombreProducto() + "',";
-		sql += "COSTOPRODUCCION=" + producto.getCostoProduccion() + ", ";
-		sql += "DESCRIPCION='" + producto.getDescripcion() + "', ";
-		sql += "TRADUCCION='" + producto.getTraduccion() + "', ";
-		sql += "TIEMPO=" + producto.getTiempo() + ", ";
-		sql += "PRECIO=" + producto.getPrecio() + ", ";
-		sql += "CATEGORIA='" + producto.getCategoria() + "', ";
-		sql += "DISPONIBLES=" + producto.getDisponibles() + ", ";
+		sql += "NOMBRE='" + producto.getNombreProducto() + ",";
+		sql += "COSTOPRODUCCION=" + producto.getCostoProduccion() + ",";
+		sql += "DESCRIPCION='" + producto.getDescripcion() + ",";
+		sql += "TRADUCCION='" + producto.getTraduccion() + ",";
+		sql += "TIEMPO=" + producto.getTiempo() + ",";
+		sql += "PRECIO=" + producto.getPrecio() + ",";
+		sql += "CATEGORIA='" + producto.getCategoria() + ",";
+		sql += "DISPONIBLES=" + producto.getDisponibles() + ",";
 		sql += "ID_MENU=" + producto.getMenu();
 		sql += " WHERE ID = " + producto.getId();
 

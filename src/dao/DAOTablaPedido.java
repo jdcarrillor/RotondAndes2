@@ -119,8 +119,8 @@ public class DAOTablaPedido {
 	public void addPedido(Pedido pedido) throws SQLException, Exception {
 
 		String sql = "INSERT INTO PEDIDO VALUES (";
-		sql += pedido.getId() + ",'";
-		sql += pedido.getfecha() + "',";
+		sql += pedido.getId() + ",";
+		sql += pedido.getfecha() + ",";
 		sql += pedido.getIdUsuario() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -140,7 +140,7 @@ public class DAOTablaPedido {
 	public void updatePedido(Pedido pedido) throws SQLException, Exception {
 
 		String sql = "UPDATE PEDIDO SET ";
-		sql += "FECHA=" + pedido.getfecha();
+		sql += "FECHA=" + pedido.getfecha()+ ",";
 		sql += "ID_USUARIO=" + pedido.getIdUsuario();
 		sql += " WHERE ID = " + pedido.getId();
 

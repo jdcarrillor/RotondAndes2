@@ -73,7 +73,8 @@ public class DAOTablaUsuario {
 			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			String rol = rs.getString("ROL");
-			Usuarios.add(new Usuario(id, nombre, rol, null, null));
+			String correo = rs.getString("CORREO");
+			Usuarios.add(new Usuario(id, nombre, rol,correo ));
 		}
 		return Usuarios;
 	}
@@ -99,7 +100,8 @@ public class DAOTablaUsuario {
 			String nombre2 = rs.getString("NOMBRE");
 			Long id = rs.getLong("ID");
 			String rol = rs.getString("ROL");
-			Usuarios.add(new Usuario(id, nombre2, rol, null, null));
+			String correo = rs.getString("CORREO");
+			Usuarios.add(new Usuario(id, nombre2, rol, correo));
 		}
 
 		return Usuarios;
@@ -126,7 +128,8 @@ public class DAOTablaUsuario {
 			String nombre = rs.getString("NOMBRE");
 			Long id2 = rs.getLong("ID");
 			String rol = rs.getString("ROL");
-			Usuario = new Usuario(id2, nombre, rol, null, null);
+			String correo = rs.getString("CORREO");
+			Usuario = new Usuario(id2, nombre, rol, correo);
 		}
 
 		return Usuario;
@@ -143,9 +146,9 @@ public class DAOTablaUsuario {
 	public void addUsuario(Usuario Usuario) throws SQLException, Exception {
 
 		String sql = "INSERT INTO Usuario VALUES (";
-		sql += Usuario.getId() + ",'";
-		sql += Usuario.getNombre() + "',";
-		sql += Usuario.getRol();
+		sql += Usuario.getId() + ",";
+		sql += Usuario.getNombre() + ",";
+		sql += Usuario.getRol()+ ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -164,8 +167,8 @@ public class DAOTablaUsuario {
 	public void updateUsuario(Usuario Usuario) throws SQLException, Exception {
 
 		String sql = "UPDATE Usuario SET ";
-		sql += "NOMBRE='" + Usuario.getNombre() + "',";
-		sql += "ROL='" + Usuario.getRol() + "'";
+		sql += "NOMBRE='" + Usuario.getNombre() + ",";
+		sql += "ROL='" + Usuario.getRol();
 		sql += " WHERE ID = " + Usuario.getId();
 
 

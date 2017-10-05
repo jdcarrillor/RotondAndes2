@@ -147,9 +147,9 @@ public class DAOTablaIngrediente {
 	public void addIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
 
 		String sql = "INSERT INTO INGREDIENTE VALUES (";
-		sql += ingrediente.getId() + ",'";
-		sql += ingrediente.getNombre() + "',";
-		sql += ingrediente.getDescripcion() + ",'";
+		sql += ingrediente.getId() + ",";
+		sql += ingrediente.getNombre() + ",";
+		sql += ingrediente.getDescripcion() + ",";
 		sql += ingrediente.getTraduccion() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -169,8 +169,8 @@ public class DAOTablaIngrediente {
 	public void updateIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
 
 		String sql = "UPDATE INGREDIENTE SET ";
-		sql += "NOMBRE='" + ingrediente.getNombre() + "',";
-		sql += "DESCRIPCION=" + ingrediente.getDescripcion();
+		sql += "NOMBRE='" + ingrediente.getNombre() + ",";
+		sql += "DESCRIPCION=" + ingrediente.getDescripcion()+ ",";
 		sql += "TRADUCCION=" + ingrediente.getTraduccion();
 		sql += " WHERE ID = " + ingrediente.getId();
 

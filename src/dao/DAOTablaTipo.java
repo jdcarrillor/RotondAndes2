@@ -138,9 +138,9 @@ public class DAOTablaTipo {
 	 */
 	public void addTipo(Tipo Tipo) throws SQLException, Exception {
 
-		String sql = "INSERT INTO Tipo VALUES (";
+		String sql = "INSERT INTO TIPO VALUES (";
 		sql += Tipo.getId() + ",";
-		sql += Tipo.getNombre() ;
+		sql += Tipo.getNombre() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

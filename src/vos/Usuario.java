@@ -15,21 +15,20 @@ public class Usuario {
 	@JsonProperty(value="rol")
 	private String rol;
 	
-	@JsonProperty(value="pedido")
-	private Pedido pedido;
 	
-	@JsonProperty(value="rotondAndes")
-	private RotondAndes rotondAndes;
+	@JsonProperty(value="correo")
+	private String correo;
 	
 	
-	public Usuario(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="rol")String rol,@JsonProperty(value="pedido")Pedido pedido,@JsonProperty(value="rotondAndes")RotondAndes rotondAndes)
+	
+	public Usuario(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="rol")String rol,@JsonProperty(value="correo")String correo)
 	{
 		super();
 		this.id=(id);
 		this.nombre=nombre;
 		this.rol=rol;
-		this.pedido=pedido;
-		this.rotondAndes=rotondAndes;
+		this.correo=correo;
+		
 	
 	}
 
@@ -64,24 +63,16 @@ public class Usuario {
 	}
 
 
-	public Pedido getPedido() {
-		return pedido;
+	public String getCorreo() {
+		return correo;
 	}
 
 
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 
-	public RotondAndes getRotondAndes() {
-		return rotondAndes;
-	}
-
-
-	public void setRotondAndes(RotondAndes rotondAndes) {
-		this.rotondAndes = rotondAndes;
-	}
 	
 	
 }

@@ -51,11 +51,11 @@ public class EventoServices
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getMenus() {
+	public Response getEventos() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Menu> menus;
+		List<Evento> menus;
 		try {
-			menus = tm.darMenus();
+			menus = tm.darEventos();
 		} catch (Exception e) {
 	
 			return Response.status(500).entity(doErrorMessage(e)).build();

@@ -147,7 +147,7 @@ public class DAOTablaMenu
 			sql += menu.getId() + ",";
 			sql += menu.getcosto()+ ",";
 			sql += menu.getprecio()+ ",";
-			sql += menu.getId_restaurante()+ ",";
+			sql += menu.getId_restaurante()+ ","; 	
 			sql += menu.getId_pedido() + ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);

@@ -81,7 +81,7 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENU");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, null));
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
 	}
@@ -114,7 +114,7 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENU");
-			productos.add(new Producto(id, nombre2, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, null));
+			productos.add(new Producto(id, nombre2, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 	
 		}
 
@@ -149,7 +149,7 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENU");
-			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, null);
+			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu);
 	
 		}
 
@@ -168,9 +168,15 @@ public class DAOTablaProducto {
 
 		String sql = "INSERT INTO PRODUCTO VALUES (";
 		sql += producto.getId() + ",";
-		sql += producto.getNombreProducto() + ",";
-		sql += producto.getDescripcion() + ",";
-		sql += producto.getTraduccion() + ")";
+		sql += "'"+producto.getNombreProducto() + "',";
+		sql += producto.getCostoProduccion() + ",";
+		sql += "'"+producto.getDescripcion() + "',";
+		sql += "'"+producto.getTraduccion() + "',";
+		sql += producto.getTiempo() + ",";
+		sql += producto.getPrecio() + ",";
+		sql += "'"+producto.getCategoria() + "',";
+		sql += producto.getDisponibles() + ",";
+		sql += producto.getMenu() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -188,14 +194,14 @@ public class DAOTablaProducto {
 	 */
 	public void updateProducto(Producto producto) throws SQLException, Exception {
 
-		String sql = "UPDATE Pedido SET ";
-		sql += "NOMBRE='" + producto.getNombreProducto() + ",";
+		String sql = "UPDATE PRODUCTO SET ";
+		sql += "NOMBRE='" + producto.getNombreProducto() + "',";
 		sql += "COSTOPRODUCCION=" + producto.getCostoProduccion() + ",";
-		sql += "DESCRIPCION='" + producto.getDescripcion() + ",";
-		sql += "TRADUCCION='" + producto.getTraduccion() + ",";
+		sql += "DESCRIPCION='" + producto.getDescripcion() + "',";
+		sql += "TRADUCCION='" + producto.getTraduccion() + "',";
 		sql += "TIEMPO=" + producto.getTiempo() + ",";
 		sql += "PRECIO=" + producto.getPrecio() + ",";
-		sql += "CATEGORIA='" + producto.getCategoria() + ",";
+		sql += "CATEGORIA='" + producto.getCategoria() + "',";
 		sql += "DISPONIBLES=" + producto.getDisponibles() + ",";
 		sql += "ID_MENU=" + producto.getMenu();
 		sql += " WHERE ID = " + producto.getId();

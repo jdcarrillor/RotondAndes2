@@ -139,8 +139,8 @@ public class DAOTablaEvento
 		public void addEvento(Evento Evento) throws SQLException, Exception {
 
 			String sql = "INSERT INTO EVENTO VALUES (";
+			sql += "'"+Evento.getFecha()+"'"+ ",";
 			sql += Evento.getId() + ",";
-			sql += Evento.getFecha()+ ",";
 			sql += Evento.getNum_comensales()+ ",";
 			sql += Evento.getId_zona()+ ",";
 			sql += Evento.getId_usuarioCliente() + ")";
@@ -163,7 +163,7 @@ public class DAOTablaEvento
 		public void updateEvento(Evento Evento) throws SQLException, Exception {
 
 			String sql = "UPDATE EVENTO SET ";
-			sql += "FECHA=" + Evento.getFecha()+ ",";
+			sql += "FECHA='" + Evento.getFecha()+"'"+ ",";
 			sql += "NUM_COMENSALES=" + Evento.getNum_comensales()+ ",";
 			sql += "ID_ZONA=" + Evento.getId_zona()+ ",";
 			sql += "ID_USUARIOCLIENTE=" + Evento.getId_usuarioCliente();

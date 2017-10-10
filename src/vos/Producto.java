@@ -37,11 +37,9 @@ public class Producto
 	@JsonProperty(value="menu")
 	private Long menu;
 	
-	@JsonProperty(value="tipos")
-	private ArrayList<Tipo> tipos;
 
 	
-	public Producto(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombreProducto,@JsonProperty(value="costoProduccion")double costoProduccion,@JsonProperty(value="precio")double precio,@JsonProperty(value="tiempo")double tiempo,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccion")String traduccion,@JsonProperty(value="categoria")String categoria,@JsonProperty(value="disponibles")int disponibles, @JsonProperty(value="id_menu")Long menu, @JsonProperty(value="tipos")ArrayList<Tipo> tipos) {
+	public Producto(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombreProducto,@JsonProperty(value="costoProduccion")double costoProduccion,@JsonProperty(value="precio")double precio,@JsonProperty(value="tiempo")double tiempo,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccion")String traduccion,@JsonProperty(value="categoria")String categoria,@JsonProperty(value="disponibles")int disponibles, @JsonProperty(value="id_menu")Long menu) {
 		super();
 		this.id=id;
 		this.nombreProducto=nombreProducto;
@@ -53,7 +51,6 @@ public class Producto
 		this.categoria = categoria;
 		this.disponibles = disponibles;
 		this.menu = menu;
-		this.tipos = tipos;
 		
 	}
 
@@ -151,13 +148,7 @@ public class Producto
 		this.menu = menu;
 	}
 
-	public ArrayList<Tipo> getTipos(){
-		return tipos;
-	}
 	
-	public void setTipos(ArrayList<Tipo> tipos){
-		this.tipos = tipos;
-	}
 
 
 	

@@ -139,9 +139,9 @@ public class DAOTablaRestaurante
 
 			String sql = "INSERT INTO Restaurante VALUES (";
 			sql += restaurante.getId() + ",";
-			sql += restaurante.getnombre() + ",";
-			sql += restaurante.getrepresentante() + ",";
-			sql += restaurante.gettipoComida() + ",";
+			sql += "'"+restaurante.getnombre()+"'" + ",";
+			sql += "'"+restaurante.getrepresentante()+"'" + ",";
+			sql += "'"+restaurante.gettipoComida()+"'" + ",";
 			sql += restaurante.getIdZona() +  ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -160,10 +160,10 @@ public class DAOTablaRestaurante
 		 */
 		public void updateRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
-			String sql = "UPDATE VIDEO SET ";
-			sql += "NOMBRE='" + restaurante.getnombre() + ",";
-			sql += "REPRESENTANTE=" + restaurante.getrepresentante()+ ",";
-			sql += "TIPO_COMIDA=" + restaurante.gettipoComida()+ ",";
+			String sql = "UPDATE RESTAURANTE SET ";
+			sql += "NOMBRE='" + restaurante.getnombre() + "',";
+			sql += "REPRESENTANTE='" + restaurante.getrepresentante()+ "',";
+			sql += "TIPO_COMIDA='" + restaurante.gettipoComida()+ "',";
 			sql += "ID_ZONA=" + restaurante.getIdZona();
 			sql += " WHERE ID = " + restaurante.getId();
 

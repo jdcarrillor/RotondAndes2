@@ -140,7 +140,7 @@ public class DAOTablaTipo {
 
 		String sql = "INSERT INTO TIPO VALUES (";
 		sql += Tipo.getId() + ",";
-		sql += Tipo.getNombre() + ")";
+		sql += "'"+ Tipo.getNombre() +"'"+ ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -159,7 +159,7 @@ public class DAOTablaTipo {
 	public void updateTipo(Tipo Tipo) throws SQLException, Exception {
 
 		String sql = "UPDATE Tipo SET ";
-		sql += "NOMBRE=" + Tipo.getNombre();
+		sql += "NOMBRE='" + Tipo.getNombre()+"'";
 		sql += " WHERE ID = " + Tipo.getId();
 
 

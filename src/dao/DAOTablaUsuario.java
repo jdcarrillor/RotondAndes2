@@ -147,8 +147,8 @@ public class DAOTablaUsuario {
 
 		String sql = "INSERT INTO Usuario VALUES (";
 		sql += Usuario.getId() + ",";
-		sql += Usuario.getNombre() + ",";
-		sql += Usuario.getRol()+ ")";
+		sql += "'"+ Usuario.getNombre()+"'" + ",";
+		sql += "'"+ Usuario.getRol()+"'" + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -167,8 +167,8 @@ public class DAOTablaUsuario {
 	public void updateUsuario(Usuario Usuario) throws SQLException, Exception {
 
 		String sql = "UPDATE Usuario SET ";
-		sql += "NOMBRE='" + Usuario.getNombre() + ",";
-		sql += "ROL='" + Usuario.getRol();
+		sql += "NOMBRE='" + Usuario.getNombre()+"'"  + ",";
+		sql += "ROL='" + Usuario.getRol()+"'" ;
 		sql += " WHERE ID = " + Usuario.getId();
 
 

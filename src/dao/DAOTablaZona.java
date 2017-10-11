@@ -140,10 +140,10 @@ public class DAOTablaZona
 
 			String sql = "INSERT INTO ZONA VALUES (";
 			sql += Zona.getId() + ",";
-			sql += Zona.getespacio()+ ",";
+			sql += "'"+ Zona.getespacio()+"'"+",";
 			sql += Zona.getcapacidad()+ ",";
 			sql += Zona.getnecesidadesEspeciales()+ ",";
-			sql += Zona.getcondiciones() + ")";
+			sql += "'"+ Zona.getcondiciones()+"'" + ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -163,10 +163,10 @@ public class DAOTablaZona
 		public void updateZona(Zona Zona) throws SQLException, Exception {
 
 			String sql = "UPDATE ZONA SET ";
-			sql += "ESPACIO=" + Zona.getespacio()+ ",";
+			sql += "ESPACIO='" + Zona.getespacio()+ "'"+",";
 			sql += "CAPACIDAD=" + Zona.getcapacidad()+ ",";
 			sql += "APTO=" + Zona.getnecesidadesEspeciales()+ ",";
-			sql += "CONDICIONES=" + Zona.getcondiciones();
+			sql += "CONDICIONES='" + Zona.getcondiciones()+"'";
 			sql += " WHERE ID = " + Zona.getId();
 
 

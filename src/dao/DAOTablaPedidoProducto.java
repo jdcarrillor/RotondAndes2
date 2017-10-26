@@ -515,5 +515,5 @@ public class DAOTablaPedidoProducto {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
-
 }
+

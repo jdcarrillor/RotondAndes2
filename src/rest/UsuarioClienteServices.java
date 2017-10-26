@@ -15,13 +15,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-
 import tm.RotondAndesTM;
-import vos.Usuario;
+import vos.UsuarioCliente;
 
-@Path("usuarios")
-public class UsuarioServices {
+@Path("usuariosCliente")
+public class UsuarioClienteServices {
 	
 
 	/**
@@ -54,9 +52,9 @@ public class UsuarioServices {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getUsuarios() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Usuario> Usuarios;
+		List<UsuarioCliente> Usuarios;
 		try {
-			Usuarios = tm.darUsuarios();
+			Usuarios = tm.darUsuariosCliente();
 		} catch (Exception e) {
 	
 			return Response.status(500).entity(doErrorMessage(e)).build();
@@ -79,7 +77,7 @@ public class UsuarioServices {
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Usuario v = tm.buscarUsuarioPorId( id );
+			UsuarioCliente v = tm.buscarUsuarioClientePorId( id );
 			return Response.status( 200 ).entity( v ).build( );			
 		}
 		catch( Exception e )
@@ -98,13 +96,13 @@ public class UsuarioServices {
 	@GET
 	@Path( "{nombre}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getUsuarioName( @QueryParam("nombre") String name) {
+	public Response getUsuarioName( @PathParam("nombre") String name) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Usuario> Usuarios;
+		List<UsuarioCliente> Usuarios;
 		try {
 			if (name == null || name.length() == 0)
 				throw new Exception("Nombre del Usuario no valido");
-			Usuarios = tm.buscarUsuariosPorName(name);
+			Usuarios = tm.buscarUsuariosClientePorName(name);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -121,10 +119,10 @@ public class UsuarioServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addUsuario(Usuario Usuario) {
+	public Response addUsuario(UsuarioCliente Usuario) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.addUsuario(Usuario);
+			tm.addUsuarioCliente(Usuario);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -141,10 +139,10 @@ public class UsuarioServices {
 	@Path("/varios")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addUsuario(List<Usuario> Usuarios) {
+	public Response addUsuario(List<UsuarioCliente> Usuarios) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.addUsuarios(Usuarios);
+			tm.addUsuariosCliente(Usuarios);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -160,10 +158,10 @@ public class UsuarioServices {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateUsuario(Usuario Usuario) {
+	public Response updateUsuario(UsuarioCliente Usuario) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.updateUsuario(Usuario);
+			tm.updateUsuarioCliente(Usuario);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -179,10 +177,10 @@ public class UsuarioServices {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteUsuario(Usuario Usuario) {
+	public Response deleteUsuario(UsuarioCliente Usuario) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.deleteUsuario(Usuario);
+			tm.deleteUsuarioCliente(Usuario);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -191,7 +189,3 @@ public class UsuarioServices {
 
 
 }
-
-
-
-

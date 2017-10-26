@@ -71,10 +71,10 @@ public class DAOTablaIngrediente {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
+			Long id = rs.getLong("IDINGREDIENTE");
+			String nombre = rs.getString("NOMBREINGREDIENTE");
+			String descripcion = rs.getString("DESCRIPCIONINGREDIENTE");
+			String traduccion = rs.getString("TRADUCCIONINGREDIENTE");
 			ingredientes.add(new Ingrediente(id, nombre, descripcion, traduccion));
 		}
 		return ingredientes;
@@ -91,17 +91,17 @@ public class DAOTablaIngrediente {
 	public ArrayList<Ingrediente> buscarIngredientesPorNombre(String nombre) throws SQLException, Exception {
 		ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
 
-		String sql = "SELECT * FROM INGREDIENTE WHERE NOMBRE ='" + nombre + "'";;
+		String sql = "SELECT * FROM INGREDIENTE WHERE NOMBREINGREDIENTE ='" + nombre + "'";;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			String nombre2 = rs.getString("NOMBRE");
-			Long id = rs.getLong("ID");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
+			String nombre2 = rs.getString("NOMBREINGREDIENTE");
+			Long id = rs.getLong("IDINGREDIENTE");
+			String descripcion = rs.getString("DESCRIPCIONINGREDIENTE");
+			String traduccion = rs.getString("TRADUCCIONINGREDIENTE");
 			ingredientes.add(new Ingrediente(id, nombre2, descripcion, traduccion));
 		}
 
@@ -119,17 +119,17 @@ public class DAOTablaIngrediente {
 	{
 		Ingrediente ingrediente = null;
 
-		String sql = "SELECT * FROM INGREDIENTE WHERE ID =" + id;
+		String sql = "SELECT * FROM INGREDIENTE WHERE IDINGREDIENTE =" + id;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			String nombre = rs.getString("NOMBRE");
-			Long id2 = rs.getLong("ID");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
+			String nombre = rs.getString("NOMBREINGREDIENTE");
+			Long id2 = rs.getLong("IDINGREDIENTE");
+			String descripcion = rs.getString("DESCRIPCIONINGREDIENTE");
+			String traduccion = rs.getString("TRADUCCIONINGREDIENTE");
 			ingrediente = new Ingrediente(id2, nombre, descripcion, traduccion);
 		}
 
@@ -169,10 +169,10 @@ public class DAOTablaIngrediente {
 	public void updateIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
 
 		String sql = "UPDATE INGREDIENTE SET ";
-		sql += "NOMBRE='" + ingrediente.getNombre() + "',";
-		sql += "DESCRIPCION='" + ingrediente.getDescripcion()+ "',";
-		sql += "TRADUCCION='" + ingrediente.getTraduccion()+"'";
-		sql += " WHERE ID = " + ingrediente.getId();
+		sql += "NOMBREINGREDIENTE='" + ingrediente.getNombre() + "',";
+		sql += "DESCRIPCIONINGREDIENTE='" + ingrediente.getDescripcion()+ "',";
+		sql += "TRADUCCIONINGREDIENTE='" + ingrediente.getTraduccion()+"'";
+		sql += " WHERE IDINGREDIENTE = " + ingrediente.getId();
 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -191,7 +191,7 @@ public class DAOTablaIngrediente {
 	public void deleteIngrediente(Ingrediente ingrediente) throws SQLException, Exception {
 
 		String sql = "DELETE FROM INGREDIENTE";
-		sql += " WHERE ID = " + ingrediente.getId();
+		sql += " WHERE IDINGREDIENTE = " + ingrediente.getId();
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

@@ -98,7 +98,7 @@ public class IngredienteServices {
 	@GET
 	@Path( "{nombre}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getIngredienteName( @QueryParam("nombre") String name) {
+	public Response getIngredienteName( @PathParam("nombre") String name) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Ingrediente> ingredientes;
 		try {

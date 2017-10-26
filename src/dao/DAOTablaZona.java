@@ -59,17 +59,37 @@ public class DAOTablaZona
 			this.conn = con;
 		}
 		
-		/**
-		 * Metodo que, usando la conexión a la base de datos, saca todos los restaurantes de la base de datos
-		 * <b>SQL Statement:</b> SELECT * FROM RESTAURANTE;
-		 * @return Arraylist con los videos de la base de datos.
-		 * @throws SQLException - Cualquier error que la base de datos arroje.
-		 * @throws Exception - Cualquier error que no corresponda a la base de datos
-		 */
-		public  ArrayList<Zona> darZonas() throws SQLException, Exception {
+		
+		public  ArrayList<Zona> darZonasGroupByEspacio() throws SQLException, Exception {
 			ArrayList<Zona> Zonas = new ArrayList<Zona>();
 
-			String sql = "SELECT * FROM ZONA";
+			String sql = "SELECT * FROM ZONA GROUP BY ESPACIO";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
+		public  ArrayList<Zona> darZonasGroupByCapacidad() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA GROUP BY CAPACIDADZONA";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -92,6 +112,192 @@ public class DAOTablaZona
 		}
 		
 		
+		public  ArrayList<Zona> darZonasGroupByApto() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA GROUP BY APTO";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
+		public  ArrayList<Zona> darZonasGroupByCondiciones() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA GROUP BY CONDICIONES";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
+		public  ArrayList<Zona> darZonasOrderByEspacio() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA ORDER BY ESPACIO";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
+		public  ArrayList<Zona> darZonasOrderByCapacidad() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA ORDER BY CAPACIDADZONA";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
+		public  ArrayList<Zona> darZonasOrderByApto() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA ORDER BY APTO";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
+		public  ArrayList<Zona> darZonasOrderByCondiciones() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA ORDER BY CONDICIONES";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
+		/**
+		 * Metodo que, usando la conexión a la base de datos, saca todos los restaurantes de la base de datos
+		 * <b>SQL Statement:</b> SELECT * FROM RESTAURANTE;
+		 * @return Arraylist con los videos de la base de datos.
+		 * @throws SQLException - Cualquier error que la base de datos arroje.
+		 * @throws Exception - Cualquier error que no corresponda a la base de datos
+		 */
+		public  ArrayList<Zona> darZonas() throws SQLException, Exception {
+			ArrayList<Zona> Zonas = new ArrayList<Zona>();
+
+			String sql = "SELECT * FROM ZONA";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("IDZONA");
+				String espacio = rs.getString("ESPACIO");
+				int capacidad = rs.getInt("CAPACIDADZONA");
+				double apto = rs.getDouble("APTO");
+				String condiciones = rs.getString("CONDICIONES");
+				
+				
+				Zonas.add(new Zona(id, espacio, capacidad, apto, condiciones));
+				
+            
+			}
+			return Zonas;
+		}
+		
+		
 		
 		/**
 		 * Metodo que busca el video con el id que entra como parametro.
@@ -104,16 +310,16 @@ public class DAOTablaZona
 		{
 			Zona Zona= null;
 
-			String sql = "SELECT * FROM ZONA WHERE ID =" + id;
+			String sql = "SELECT * FROM ZONA WHERE IDZONA =" + id;
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			ResultSet rs = prepStmt.executeQuery();
 
 			if(rs.next()) {
-				Long id2 = rs.getLong("ID");
+				Long id2 = rs.getLong("IDZONA");
 				String espacio = rs.getString("ESPACIO");
-				int capacidad = rs.getInt("CAPACIDAD");
+				int capacidad = rs.getInt("CAPACIDADZONA");
 				double apto = rs.getDouble("APTO");
 				String condiciones = rs.getString("CONDICIONES");
 				
@@ -164,16 +370,17 @@ public class DAOTablaZona
 
 			String sql = "UPDATE ZONA SET ";
 			sql += "ESPACIO='" + Zona.getespacio()+ "'"+",";
-			sql += "CAPACIDAD=" + Zona.getcapacidad()+ ",";
+			sql += "CAPACIDADZONA=" + Zona.getcapacidad()+ ",";
 			sql += "APTO=" + Zona.getnecesidadesEspeciales()+ ",";
 			sql += "CONDICIONES='" + Zona.getcondiciones()+"'";
-			sql += " WHERE ID = " + Zona.getId();
+			sql += " WHERE IDZONA = " + Zona.getId();
 
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			prepStmt.executeQuery();
 		}
+		
 
 		/**
 		 * Metodo que elimina el video que entra como parametro en la base de datos.
@@ -186,7 +393,7 @@ public class DAOTablaZona
 		public void deleteZona(Zona Zona) throws SQLException, Exception {
 
 			String sql = "DELETE FROM ZONA";
-			sql += " WHERE ID = " + Zona	.getId();
+			sql += " WHERE IDZONA = " + Zona.getId();
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);

@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import vos.PedidoProducto;
 import vos.Producto;
 
-public class DAOTablaProducto {
+public class DAOTablaPedidoProducto {
 
+	
 
 	/**
 	 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
@@ -25,7 +27,7 @@ public class DAOTablaProducto {
 	 * Metodo constructor que crea DAOProducto
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOTablaProducto() {
+	public DAOTablaPedidoProducto() {
 		recursos = new ArrayList<Object>();
 	}
 
@@ -61,31 +63,41 @@ public class DAOTablaProducto {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Producto> darProductos() throws SQLException, Exception {
-		ArrayList<Producto> productos = new ArrayList<Producto>();
+	public ArrayList<PedidoProducto> darProductosPedido() throws SQLException, Exception {
+		ArrayList<PedidoProducto> productos = new ArrayList<PedidoProducto>();
 
-		String sql = "SELECT * FROM PRODUCTO";
+		String sql = "SELECT * FROM PEDIDOPRODUCTO";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
-			String nombre = rs.getString("NOMBRE");
-			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
-			Double precio = rs.getDouble("PRECIO");
-			String descripcion = rs.getString("DESCRIPCION");
-			String traduccion = rs.getString("TRADUCCION");
-			Double tiempo = rs.getDouble("TIEMPO");
-			String categoria = rs.getString("CATEGORIA");
-			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idProducto = rs.getLong("ID_PRODUCTO");
+			Long idPedido = rs.getLong("ID_PEDIDO");
+			productos.add(new PedidoProducto(idProducto, idPedido));
 		}
 		return productos;
 	}
 	
+	
+	
+	public ArrayList<PedidoProducto> darProductosMasPedido() throws SQLException, Exception {
+		ArrayList<PedidoProducto> productos = new ArrayList<PedidoProducto>();
+
+		String sql = "SELECT numeroRepetidas, ID_PRODUCTO FROM( SELECT MAX (NUMERO) AS numeroRepetidas, ID_PRODUCTO FROM( SELECT COUNT(*) AS NUMERO, ID_PRODUCTO FROM PEDIDOPRODUCTO group by ID_PRODUCTO) group by ID_PRODUCTO) WHERE numeroRepetidas = (SELECT MAX (NUMERO) AS numeroRepetidas FROM( SELECT COUNT(*) AS NUMERO, ID_PRODUCTO FROM PEDIDOPRODUCTO group by ID_PRODUCTO) )";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long idProducto = rs.getLong("ID_PRODUCTO");
+			int numeroPedidos = rs.getInt("numeroRepetidas");
+			productos.add(new PedidoProducto(idProducto, numeroPedidos));
+		}
+		return productos;
+	}
 	public ArrayList<Producto> darProductosoOrderByNombre() throws SQLException, Exception {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 
@@ -97,7 +109,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -106,7 +118,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -123,7 +135,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -132,7 +144,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -149,7 +161,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -158,7 +170,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -175,7 +187,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -184,7 +196,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -202,7 +214,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -211,7 +223,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -238,7 +250,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -247,7 +259,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -265,7 +277,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -274,7 +286,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -292,7 +304,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -301,7 +313,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -318,7 +330,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -327,7 +339,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -345,7 +357,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
+			Long id = rs.getLong("ID");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -354,7 +366,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -378,8 +390,8 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDPRODUCTO");
 			String nombre2 = rs.getString("NOMBRE");
+			Long id = rs.getLong("ID");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
 			String descripcion = rs.getString("DESCRIPCION");
@@ -387,7 +399,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			productos.add(new Producto(id, nombre2, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 	
 		}
@@ -406,15 +418,15 @@ public class DAOTablaProducto {
 	{
 		Producto producto = null;
 
-		String sql = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO =" + id;
+		String sql = "SELECT * FROM PRODUCTO WHERE ID =" + id;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			Long id2 = rs.getLong("IDPRODUCTO");
 			String nombre = rs.getString("NOMBRE");
+			Long id2 = rs.getLong("ID");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
 			String descripcion = rs.getString("DESCRIPCION");
@@ -422,7 +434,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			Long menu = rs.getLong("ID_MENU");
 			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu);
 	
 		}
@@ -477,8 +489,8 @@ public class DAOTablaProducto {
 		sql += "PRECIO=" + producto.getPrecio() + ",";
 		sql += "CATEGORIA='" + producto.getCategoria() + "',";
 		sql += "DISPONIBLES=" + producto.getDisponibles() + ",";
-		sql += "ID_MENUPRODUCTO=" + producto.getMenu();
-		sql += " WHERE IDPRODUCTO = " + producto.getId();
+		sql += "ID_MENU=" + producto.getMenu();
+		sql += " WHERE ID = " + producto.getId();
 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -497,10 +509,11 @@ public class DAOTablaProducto {
 	public void deleteProducto(Producto producto) throws SQLException, Exception {
 
 		String sql = "DELETE FROM PRODUCTO";
-		sql += " WHERE IDPRODUCTO = " + producto.getId();
+		sql += " WHERE ID = " + producto.getId();
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+
 }

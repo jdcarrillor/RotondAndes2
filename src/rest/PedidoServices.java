@@ -61,6 +61,8 @@ public class PedidoServices {
 		}
 		return Response.status(200).entity(pedidos).build();
 	}
+	
+	
 
 	 /**
      * Metodo que expone servicio REST usando GET que busca el Pedido con el id que entra como parametro

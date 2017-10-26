@@ -10,7 +10,7 @@ public class Evento
 	private Long id;
 	
 	@JsonProperty(value="fecha")
-	private Date fecha;
+	private String fecha;
 	
 	@JsonProperty(value="num_comensales")
 	private int num_comensales;
@@ -22,7 +22,7 @@ public class Evento
 	private Long id_usuarioCliente;
 	
 	
-	public Evento(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")Date fecha,@JsonProperty(value="num_comensales")int num_comensales,@JsonProperty(value="id_zona")Long id_zona,@JsonProperty(value="id_usuarioCliente")Long id_usuarioCliente) 
+	public Evento(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")String fecha,@JsonProperty(value="num_comensales")int num_comensales,@JsonProperty(value="id_zona")Long id_zona,@JsonProperty(value="id_usuarioCliente")Long id_usuarioCliente) 
 	{
 		super();
 		this.id=id;
@@ -43,12 +43,12 @@ public class Evento
 	}
 
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

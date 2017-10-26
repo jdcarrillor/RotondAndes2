@@ -75,8 +75,8 @@ public class DAOTablaRestaurante
 			ResultSet rs = prepStmt.executeQuery();
 
 			while (rs.next()) {
-				String name = rs.getString("NOMBRE");
-				Long id = rs.getLong("ID");
+				String name = rs.getString("NOMBRERESTAURANTE");
+				Long id = rs.getLong("IDRESTAURANTE");
 				String representante= rs.getString("REPRESENTANTE");
 				String tipo_Comida= rs.getString("TIPO_COMIDA");
 				Long id_Zona=rs.getLong("ID_ZONA");
@@ -102,7 +102,7 @@ public class DAOTablaRestaurante
 		{
 			Restaurante restaurante = null;
 
-			String sql = "SELECT * FROM RESTAURANTE WHERE ID =" + id;
+			String sql = "SELECT * FROM RESTAURANTE WHERE IDRESTAURANTE =" + id;
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -110,8 +110,8 @@ public class DAOTablaRestaurante
 			if(rs!=null){
 
 			if(rs.next()) {
-				Long id2 = rs.getLong("ID");
-				String name = rs.getString("NOMBRE");
+				Long id2 = rs.getLong("IDRESTAURANTE");
+				String name = rs.getString("NOMBRERESTAURANTE");
 				String representante = rs.getString("REPRESENTANTE");
 				String tipo_comida = rs.getString("TIPO_COMIDA");
 				Long id_zona = rs.getLong("ID_ZONA");
@@ -161,11 +161,11 @@ public class DAOTablaRestaurante
 		public void updateRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
 			String sql = "UPDATE RESTAURANTE SET ";
-			sql += "NOMBRE='" + restaurante.getnombre() + "',";
+			sql += "NOMBRERESTAURANTE='" + restaurante.getnombre() + "',";
 			sql += "REPRESENTANTE='" + restaurante.getrepresentante()+ "',";
 			sql += "TIPO_COMIDA='" + restaurante.gettipoComida()+ "',";
 			sql += "ID_ZONA=" + restaurante.getIdZona();
-			sql += " WHERE ID = " + restaurante.getId();
+			sql += " WHERE IDRESTAURANTE = " + restaurante.getId();
 
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -184,7 +184,7 @@ public class DAOTablaRestaurante
 		public void deleteRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
 			String sql = "DELETE FROM RESTAURANTE";
-			sql += " WHERE ID = " + restaurante.getId();
+			sql += " WHERE IDRESTAURANTE = " + restaurante.getId();
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);

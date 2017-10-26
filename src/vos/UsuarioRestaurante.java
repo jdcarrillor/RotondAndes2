@@ -2,7 +2,7 @@ package vos;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class UsuarioAdministrador {
+public class UsuarioRestaurante {
 
 	@JsonProperty(value="id")
 	private Long id;
@@ -19,7 +19,7 @@ public class UsuarioAdministrador {
 	
 	
 	
-	public UsuarioAdministrador(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="rol")String rol,@JsonProperty(value="correo")String correo)
+	public UsuarioRestaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="rol")String rol,@JsonProperty(value="correo")String correo)
 	{
 		super();
 		this.id=(id);
@@ -70,6 +70,5 @@ public class UsuarioAdministrador {
 		this.correo = correo;
 	}
 
-	
 
 }

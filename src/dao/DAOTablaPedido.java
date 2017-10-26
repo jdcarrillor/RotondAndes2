@@ -72,10 +72,12 @@ public class DAOTablaPedido {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("ID");
-			Date fecha = rs.getDate("FECHA");
+			Long id = rs.getLong("IDPEDIDO");
+			String fecha = "" + rs.getDate("FECHA");
 			Long idUsuario = rs.getLong("ID_USUARIO");
-			pedidos.add(new Pedido(id, fecha, idUsuario));
+			Long idProducto = rs.getLong("ID_PRODUCTO");
+			Long idMenu = rs.getLong("ID_MENU");
+			pedidos.add(new Pedido(id, fecha, idUsuario, idProducto, idMenu));
 		}
 		return pedidos;
 	}
@@ -92,17 +94,19 @@ public class DAOTablaPedido {
 	{
 		Pedido pedido = null;
 
-		String sql = "SELECT * FROM PEDIDO WHERE ID =" + id;
+		String sql = "SELECT * FROM PEDIDO WHERE IDPEDIDO =" + id;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			Long id2 = rs.getLong("ID");
-			Date fecha = rs.getDate("FECHA");
+			Long id2 = rs.getLong("IDPEDIDO");
+			String fecha = "" + rs.getDate("FECHA");
 			Long idUsuario = rs.getLong("ID_USUARIO");
-			pedido = new Pedido(id2, fecha, idUsuario);
+			Long idProducto = rs.getLong("ID_PRODUCTO");
+			Long idMenu = rs.getLong("ID_MENU");
+			pedido = new Pedido(id2, fecha, idUsuario, idProducto, idMenu);
 		}
 
 		return pedido;
@@ -118,10 +122,17 @@ public class DAOTablaPedido {
 	 */
 	public void addPedido(Pedido pedido) throws SQLException, Exception {
 
+
+		String[] fecha = pedido.getfecha().split("-");
+		String dia = fecha[0];
+		String mes = fecha[1];
+		String anio = fecha[2];
 		String sql = "INSERT INTO PEDIDO VALUES (";
 		sql += pedido.getId() + ",";
-		sql += "TO_DATE"+"("+"'"+pedido.getfecha()+"'"+","+"'YYYY/MM/DD'"+")" + ",";
-		sql += pedido.getIdUsuario() + ")";
+		sql +="'"+ anio+"-"+mes+"-"+dia+"'"+  ",";
+		sql += pedido.getIdUsuario() + ",";
+		sql += pedido.getIdProducto() + ",";
+		sql += pedido.getIdMenu() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -138,11 +149,17 @@ public class DAOTablaPedido {
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
 	public void updatePedido(Pedido pedido) throws SQLException, Exception {
-
+		String[] fecha = pedido.getfecha().split("-");
+		String dia = fecha[0];
+		String mes = fecha[1];
+		String anio = fecha[2];
+		
 		String sql = "UPDATE PEDIDO SET ";
-		sql += "FECHA='" + pedido.getfecha()+ "'"+",";
-		sql += "ID_USUARIO=" + pedido.getIdUsuario();
-		sql += " WHERE ID = " + pedido.getId();
+		sql += "FECHA='" + anio+"-"+mes+"-"+dia+"'"+",";
+		sql += "ID_USUARIO="+ pedido.getIdUsuario()+",";
+		sql += "ID_PRODUCTO=" + pedido.getIdProducto()+",";
+		sql += "ID_MENU=" + pedido.getIdMenu();
+		sql += " WHERE IDPEDIDO = " + pedido.getId();
 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -161,7 +178,7 @@ public class DAOTablaPedido {
 	public void deletePedido(Pedido pedido) throws SQLException, Exception {
 
 		String sql = "DELETE FROM PEDIDO";
-		sql += " WHERE ID = " + pedido.getId();
+		sql += " WHERE IDPEDIDO = " + pedido.getId();
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

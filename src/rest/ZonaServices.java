@@ -81,6 +81,143 @@ public class ZonaServices
 		}
 	}
 	
+	@GET
+	@Path( "GroupByEspacio" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasGroupByEspacio()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasGroupByEspacio();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "GroupByCapacidad" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasGroupByCapacidad()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasGroupByCapacidad();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "GroupByApto" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasGroupByApto()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasGroupByApto();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "GroupByCondiciones" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasGroupByCondiciones()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasGroupByCondiciones();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	@GET
+	@Path( "OrderByEspacio" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasOrderByEspacio()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasOrderByEspacio();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "OrderByCapacidad" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasOrderByCapacidad()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasOrderByCapacidad();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "OrderByApto" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasOrderByApto()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasOrderByApto();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "OrderByCondiciones" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getZonasOrderByCondiciones()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Zona> Zona = tm.darZonasOrderByCondiciones();
+			return Response.status( 200 ).entity( Zona ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
 	/**
      * Metodo que expone servicio REST usando POST que agrega el video que recibe en Json
      * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/video

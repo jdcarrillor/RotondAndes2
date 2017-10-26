@@ -10,22 +10,31 @@ public class Pedido
 	@JsonProperty(value="id")
 	private Long id;
 	
+	
 	@JsonProperty(value="fecha")
-	private Date fecha;
+	private String fecha;
 	
 	@JsonProperty(value="idUsuario")
 	private Long idUsuario;
 	
+	@JsonProperty(value="idProducto")
+	private Long idProducto;
+	
+	@JsonProperty(value="idMenu")
+	private Long idMenu;
+	
 
 
 
 
 
-	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")Date fecha, @JsonProperty(value="idUsuario")Long idUsuario) {
+	public Pedido(@JsonProperty(value="id")Long id, @JsonProperty(value="fecha")String fecha, @JsonProperty(value="idUsuario")Long idUsuario,  @JsonProperty(value="idProducto")Long idProducto,  @JsonProperty(value="idMenu")Long idMenu) {
 		super();
 		this.id=id;
 		this.fecha=fecha;
 		this.idUsuario =idUsuario;
+		this.idProducto=idProducto;
+		this.idMenu= idMenu;
 	}
 		
 		
@@ -43,13 +52,13 @@ public class Pedido
 
 
 
-	public Date getfecha() {
+	public String getfecha() {
 		return fecha;
 	}
 
 
 
-	public void setfecha(Date fecha) {
+	public void setfecha(String fecha) {
 		this.fecha = fecha;
 	}
 
@@ -66,6 +75,34 @@ public class Pedido
 	{
 		this.idUsuario = idUsuario;
 
+	}
+
+
+
+
+	public Long getIdProducto() {
+		return idProducto;
+	}
+
+
+
+
+	public void setIdProducto(Long idProducto) {
+		this.idProducto = idProducto;
+	}
+
+
+
+
+	public Long getIdMenu() {
+		return idMenu;
+	}
+
+
+
+
+	public void setIdMenu(Long idMenu) {
+		this.idMenu = idMenu;
 	}
 
 

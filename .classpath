@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-all-1.7.5.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jar" sourcepath="C:/Users/danic/.m2/repository/org/mortbay/jetty/servlet-api-2.5/6.1.2rc1/servlet-api-2.5-6.1.2rc1-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.ws.rs.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 10.0 Runtime">
 		<attributes>

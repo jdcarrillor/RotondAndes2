@@ -59,34 +59,6 @@ public class DAOTablaProductoIngrediente {
 			this.conn = con;
 		}
 		
-
-		/**
-		 * Metodo que, usando la conexión a la base de datos, saca todos los restaurantes de la base de datos
-		 * <b>SQL Statement:</b> SELECT * FROM RESTAURANTE;
-		 * @return Arraylist con los videos de la base de datos.
-		 * @throws SQLException - Cualquier error que la base de datos arroje.
-		 * @throws Exception - Cualquier error que no corresponda a la base de datos
-		 */
-		public ArrayList<> darProductosIngredientes() throws SQLException, Exception {
-			ArrayList<> pis = new ArrayList<>();
-
-			String sql = "SELECT * FROM PRODUCTOINGREDIENTE";
-
-			PreparedStatement prepStmt = conn.prepareStatement(sql);
-			recursos.add(prepStmt);
-			ResultSet rs = prepStmt.executeQuery();
-
-			while (rs.next()) {
-				Long idProducto = rs.getLong("ID_PRODUCTO");
-				Long idIngrediente = rs.getLong("ID_INGREDIENTE");
-				
-				
-			//pis.add(
-				
-            
-			}
-			return pis;
-		}
 		
 		
 	

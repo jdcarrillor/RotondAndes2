@@ -2,7 +2,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import vos.Ingrediente;
 
 public class DAOTablaIngredientesEquivalentes {
 	
@@ -54,5 +57,18 @@ public class DAOTablaIngredientesEquivalentes {
 		public void setConn(Connection con){
 			this.conn = con;
 		}
+		
+		public void setIngredientes(Ingrediente ing1, Ingrediente ing2)throws SQLException, Exception{
+
+			String sql = "INSERT INTO INGREDIENTESEQUIVALENTES VALUES (";
+			sql += ing1.getId() + ",";
+			sql += ing2.getId() + ")";
+		
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			prepStmt.executeQuery();
+		}
+		
+		
 
 }

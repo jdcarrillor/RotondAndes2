@@ -188,5 +188,20 @@ public class IngredienteServices {
 		}
 		return Response.status(200).entity(ingrediente).build();
 	}
+	
+	@POST
+	@Path("{id: \\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addIngredienteEquivalente(@PathParam( "id" ) Long id, Ingrediente ing2 ){
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try{
+			tm.addIngredienteEquivalente(id, ing2);
+		}
+		catch(Exception e){
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(ing2).build();
+	}
 
 }

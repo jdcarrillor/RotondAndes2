@@ -3550,8 +3550,40 @@ public class RotondAndesTM
 			e.printStackTrace();
 			throw e;
 		} finally {
-			try {
+			try { 
 				daoUsuarios.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+
+
+	public void addIngredienteEquivalente(Long id1, Ingrediente ing2) throws Exception {
+		DAOTablaIngrediente daoIngredientes = new DAOTablaIngrediente();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoIngredientes.setConn(conn);
+			daoIngredientes.addIngredienteEquivalente(id1, ing2);;
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoIngredientes.cerrarRecursos();
 				if(this.conn!=null)
 					this.conn.close();
 			} catch (SQLException exception) {

@@ -107,7 +107,7 @@ public class DAOTablaIngrediente {
 
 		return ingredientes;
 	}
-	
+
 	/**
 	 * Metodo que busca el Ingrediente con el id que entra como parametro.
 	 * @param name - Id de el Ingrediente a buscar
@@ -157,7 +157,7 @@ public class DAOTablaIngrediente {
 		prepStmt.executeQuery();
 
 	}
-	
+
 	/**
 	 * Metodo que actualiza el Ingrediente que entra como parametro en la base de datos.
 	 * @param Ingrediente - el Ingrediente a actualizar. Ingrediente !=  null
@@ -197,22 +197,28 @@ public class DAOTablaIngrediente {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
-	
+
 	public void addIngredienteEquivalente(Long id1, Ingrediente ing2) throws SQLException, Exception
 	{
-		String sql = "SELECT * FROM INGREDIENTE WHERE IDINGREDIENTE =" + id1;
-
+		String sql = "SELECT * FROM INGREDIENTE WHERE IDINGREDIENTE = " + id1;
+		String sql1 = "SELECT * FROM INGREDIENTE WHERE IDINGREDIENTE = " + ing2.getId();
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
-		prepStmt.executeQuery();
-		
-		String sql2 = "INSERT INTO INGREDIENTESEQUIVALENTES VALUES (";
-		sql2 += id1 + ",";
-		sql += ing2.getId() + ")";
-		
-		PreparedStatement prepStmt2 = conn.prepareStatement(sql2);
-		recursos.add(prepStmt2);
-		prepStmt2.executeQuery();
-		
+		ResultSet set = prepStmt.executeQuery();
+		PreparedStatement prepStmt1 = conn.prepareStatement(sql1);
+		recursos.add(prepStmt1);
+		ResultSet set1 = prepStmt1.executeQuery();
+		if(set!=null&&set1!=null)
+		{
+			String sql2 = "INSERT INTO INGREDIENTESEQUIVALENTES VALUES (";
+			sql2 += id1 + ",";
+			sql2 += ing2.getId() + ")";
+
+			PreparedStatement prepStmt2 = conn.prepareStatement(sql2);
+			recursos.add(prepStmt2);
+			prepStmt2.executeQuery();
+		}
+		else
+			throw new Exception("paila");
 	}
 }

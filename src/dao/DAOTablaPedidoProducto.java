@@ -470,6 +470,22 @@ public class DAOTablaPedidoProducto {
 
 	}
 	
+	
+	public void addPedidoProduc(Long idPedido, Long idProducto) throws SQLException, Exception {
+
+		String sql = "INSERT INTO PEDIDOPRODUCTO VALUES (";
+		sql += idProducto + ",";
+		sql += idPedido + ")";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+
+	}
+	
+	
+	
+	
 	/**
 	 * Metodo que actualiza el Pedido que entra como parametro en la base de datos.
 	 * @param Pedido - el Pedido a actualizar. Pedido !=  null

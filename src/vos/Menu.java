@@ -29,6 +29,9 @@ public class Menu
 	@JsonProperty(value="id_pedido")
 	private Long id_pedido;
 	
+	@JsonProperty(value="disponibles")
+	private int disponibles;
+	
 	
 	
 	//Peniente MenuDefinido
@@ -36,13 +39,14 @@ public class Menu
 
 
 
-	public Menu(@JsonProperty(value="id")Long id,@JsonProperty(value="costo")double costo,@JsonProperty(value="precio")double precio,@JsonProperty(value="id_restaurante")Long id_restaurante,@JsonProperty(value="id_pedido")Long id_pedido) {
+	public Menu(@JsonProperty(value="id")Long id,@JsonProperty(value="costo")double costo,@JsonProperty(value="precio")double precio,@JsonProperty(value="id_restaurante")Long id_restaurante,@JsonProperty(value="id_pedido")Long id_pedido,@JsonProperty(value="disponibles")int disponibles) {
 		super();
 		this.id=id;
 		this.costo=costo;
 		this.precio=precio;
 		this.id_restaurante=id_restaurante;
 		this.id_pedido=id_pedido;
+		this.disponibles=disponibles;
 		
 		
 	}
@@ -96,6 +100,14 @@ public class Menu
 
 	public void setId_pedido(Long id_pedido) {
 		this.id_pedido = id_pedido;
+	}
+
+	public int getDisponibles() {
+		return disponibles;
+	}
+
+	public void setDisponibles(int disponibles) {
+		this.disponibles = disponibles;
 	}
 
 

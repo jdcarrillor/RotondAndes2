@@ -486,6 +486,30 @@ public class DAOTablaProducto {
 		prepStmt.executeQuery();
 	}
 
+	
+	
+	
+	/**
+	 * Metodo que actualiza el Pedido que entra como parametro en la base de datos.
+	 * @param Pedido - el Pedido a actualizar. Pedido !=  null
+	 * <b> post: </b> se ha actualizado el Pedido en la base de datos en la transaction actual. pendiente que el Pedido master
+	 * haga commit para que los cambios bajen a la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el Pedido.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public void updateDisponiblesProd(Producto producto) throws SQLException, Exception {
+
+		String sql = "UPDATE PRODUCTO SET ";
+		
+		sql += "DISPONIBLES=" + (producto.getDisponibles()-1) ;
+		sql += " WHERE IDPRODUCTO = " + producto.getId();
+
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+
 	/**
 	 * Metodo que elimina el Pedido que entra como parametro en la base de datos.
 	 * @param Pedido - el Pedido a borrar. Pedido !=  null

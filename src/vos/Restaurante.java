@@ -22,17 +22,28 @@ public class Restaurante
 	@JsonProperty(value="idzona")
 	private Long idzona;
 	
+	@JsonProperty(value="capacidad")
+	private int capacidad;
 	
+	@JsonProperty(value="maxproductos")
+	private int maxproductos;
 	
-	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="representante")String representante,@JsonProperty(value="tipocomida")String tipo_comida,@JsonProperty(value="idzona")Long id_zona ) {
+	@JsonProperty(value="ingresos")
+	private double ingresos;
+	
+		
+	
+	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="representante")String representante,@JsonProperty(value="tipocomida")String tipo_comida,@JsonProperty(value="idzona")Long id_zona,@JsonProperty(value="capacidad")int capacidad,@JsonProperty(value="maxproductos")int maxproductos,@JsonProperty(value="ingresos")double ingresos) {
 		super();
 		this.id=id;
 		this.nombre=nombre;
 		this.representante=representante;
 		this.tipocomida=tipo_comida;
 		this.idzona= id_zona;
-	
-		
+		this.capacidad=capacidad;
+		this.maxproductos=maxproductos;
+		this.ingresos=ingresos;
+				
 		
 	}
 	public Restaurante()
@@ -97,6 +108,24 @@ public Long getIdZona() {
 
 public void setIdZona(Long idZona) {
 	this.idzona = idZona;
+}
+public int getCapacidad() {
+	return capacidad;
+}
+public void setCapacidad(int capacidad) {
+	this.capacidad = capacidad;
+}
+public int getMaxproductos() {
+	return maxproductos;
+}
+public void setMaxproductos(int maxproductos) {
+	this.maxproductos = maxproductos;
+}
+public double getIngresos() {
+	return ingresos;
+}
+public void setIngresos(double ingresos) {
+	this.ingresos = ingresos;
 }
 
 

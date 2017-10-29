@@ -5,21 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
-import vos.Menu;
-import vos.Pedido;
-import vos.Producto;
-import vos.Restaurante;
-import vos.Video;
+import vos.Contabilidad;
+import vos.Evento;
 
-public class DAOTablaMenu 
-{
-	
-	
-	
-			
-	
+public class DAOTablaContabilidad {
+
 	/**
 	 * Clase DAO que se conecta la base de datos usando JDBC para resolver los requerimientos de la aplicación
 	 * @author Monitores 2017-20
@@ -40,7 +32,7 @@ public class DAOTablaMenu
 		 * Metodo constructor que crea DAOVideo
 		 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 		 */
-		public DAOTablaMenu() {
+		public DAOTablaContabilidad() {
 			recursos = new ArrayList<Object>();
 		}
 
@@ -75,29 +67,68 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public  ArrayList<Menu> darMenus() throws SQLException, Exception {
-			ArrayList<Menu> menus = new ArrayList<Menu>();
+		public  ArrayList<Contabilidad> darContabilidad() throws SQLException, Exception {
+			ArrayList<Contabilidad> eventos = new ArrayList<Contabilidad>();
 
-			String sql = "SELECT * FROM MENU";
+			String sql = "SELECT * FROM CONTABILIDAD";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			ResultSet rs = prepStmt.executeQuery();
 
 			while (rs.next()) {
-				Long id = rs.getLong("IDMENU");
-				double costo = rs.getDouble("COSTO");
-				double precio = rs.getDouble("PRECIOMENU");
-				Long idRestaurante = rs.getLong("ID_RESTAURANTEMENU");
-				Long idPedido= rs.getLong("ID_PEDIDOMENU");
-				int disponibles= rs.getInt("DISPONIBLES");
+				Long id = rs.getLong("ID");
+				Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+				Long idProducto = rs.getLong("ID_PRODUCTO");
+				Long idMenu = rs.getLong("ID_MENU");
+				Long idCliente = rs.getLong("ID_CLIENTE");
+				Long idUsuario = rs.getLong("ID_USUARIO");
+				int unidadesVendidas = rs.getInt("UNIDADESVENDIDAS");
+				int ingresosGenerados = rs.getInt("INGRESOSGENERADOS");
 				
 				
-				menus.add(new Menu(id, costo, precio, idRestaurante, idPedido, disponibles));
+				eventos.add(new Contabilidad(id, idRestaurante, idProducto, idMenu, idCliente, idUsuario, unidadesVendidas, ingresosGenerados));
 				
             
 			}
-			return menus;
+			return eventos;
+		}
+		
+		
+		/**
+		 * Metodo que, usando la conexión a la base de datos, saca todos los restaurantes de la base de datos
+		 * <b>SQL Statement:</b> SELECT * FROM RESTAURANTE;
+		 * @return Arraylist con los videos de la base de datos.
+		 * @throws SQLException - Cualquier error que la base de datos arroje.
+		 * @throws Exception - Cualquier error que no corresponda a la base de datos
+		 */
+		public  ArrayList<Contabilidad> darContabilidadPorRestaurante(Long idRestaurantex) throws SQLException, Exception {
+			ArrayList<Contabilidad> eventos = new ArrayList<Contabilidad>();
+
+			String sql = "SELECT * FROM CONTABILIDAD WHERE ID_RESTAURANTE ="+idRestaurantex;
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long id = rs.getLong("ID");
+				Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+				Long idProducto = rs.getLong("ID_PRODUCTO");
+				Long idMenu = rs.getLong("ID_MENU");
+				Long idCliente = rs.getLong("ID_CLIENTE");
+				Long idUsuario = rs.getLong("ID_USUARIO");
+				int unidadesVendidas = rs.getInt("UNIDADESVENDIDAS");
+				int ingresosGenerados = rs.getInt("INGRESOSGENERADOS");
+				
+				
+				
+				
+				eventos.add(new Contabilidad(id, idRestaurante, idProducto, idMenu, idCliente, idUsuario, unidadesVendidas, ingresosGenerados));
+				
+            
+			}
+			return eventos;
 		}
 		
 		
@@ -109,29 +140,32 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public Menu buscarMenuPorId(Long id) throws SQLException, Exception 
+		public Contabilidad buscarContabilidadPorId(Long id) throws SQLException, Exception 
 		{
-			Menu menu= null;
+			Contabilidad Evento= null;
 
-			String sql = "SELECT * FROM MENU WHERE IDMENU =" + id;
+			String sql = "SELECT * FROM CONTABILIDAD WHERE IDEVENTO =" + id;
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			ResultSet rs = prepStmt.executeQuery();
 
 			if(rs.next()) {
-				Long id2 = rs.getLong("IDMENU");
-				double costo = rs.getDouble("COSTO");
-				double precio = rs.getDouble("PRECIOMENU");
-				Long idRestaurante = rs.getLong("ID_RESTAURANTEMENU");
-				Long idPedido= rs.getLong("ID_PEDIDOMENU");
-				int disponibles= rs.getInt("DISPONIBLES");
+				Long id2 = rs.getLong("ID");
+				Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+				Long idProducto = rs.getLong("ID_PRODUCTO");
+				Long idMenu = rs.getLong("ID_MENU");
+				Long idCliente = rs.getLong("ID_CLIENTE");
+				Long idUsuario = rs.getLong("ID_USUARIO");
+				int unidadesVendidas = rs.getInt("UNIDADESVENDIDAS");
+				int ingresosGenerados = rs.getInt("INGRESOSGENERADOS");
 				
-				menu=(new Menu(id2, costo, precio, idRestaurante, idPedido, disponibles));
+				
+				Evento =new Contabilidad(id, idRestaurante, idProducto, idMenu, idCliente, idUsuario, unidadesVendidas, ingresosGenerados);
 				
 			}
 
-			return menu;
+			return Evento;
 		}
 		
 		
@@ -143,15 +177,18 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public void addMenu(Menu menu) throws SQLException, Exception {
-
-			String sql = "INSERT INTO MENU VALUES (";
-			sql += menu.getId() + ",";
-			sql += menu.getcosto()+ ",";
-			sql += menu.getprecio()+ ",";
-			sql += menu.getId_restaurante()+ ","; 
-			sql += menu.getId_pedido() + ","; 
-			sql += menu.getDisponibles() + ")";
+		public void addContabilidad(Long id, Long idRestaurante , Long idProducto, Long idMenu, Long idCliente, Long idUsuario, int unidadesVendidas, int ingresos) throws SQLException, Exception {
+			
+			String sql = "INSERT INTO CONTABILIDAD VALUES (";
+			sql += id + ",";
+			sql += idRestaurante+ ",";
+			sql += idProducto+ ",";
+			sql += idMenu+",";
+			sql += idCliente + ",";
+			sql += idUsuario+ ",";
+			sql += unidadesVendidas+ ",";
+			sql += ingresos+ ")";
+			
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -168,36 +205,17 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public void updateMenu(Menu menu) throws SQLException, Exception {
+		public void updateContabilidad(Contabilidad Evento) throws SQLException, Exception {
 
-			String sql = "UPDATE MENU SET ";
-			sql += "COSTO=" + menu.getcosto()+ ",";
-			sql += "PRECIOMENU=" + menu.getprecio()+ ",";
-			sql += "ID_RESTAURANTEMENU=" + menu.getId_restaurante()+ ",";
-			sql += "ID_PEDIDOMENU=" + menu.getId_pedido();
-			sql += "DISPONIBLES=" + menu.getDisponibles();
-			sql += " WHERE IDMENU = " + menu.getId();
-
-
-			PreparedStatement prepStmt = conn.prepareStatement(sql);
-			recursos.add(prepStmt);
-			prepStmt.executeQuery();
-		}
-		
-		
-		/**
-		 * Metodo que actualiza el video que entra como parametro en la base de datos.
-		 * @param video - el video a actualizar. video !=  null
-		 * <b> post: </b> se ha actualizado el video en la base de datos en la transaction actual. pendiente que el video master
-		 * haga commit para que los cambios bajen a la base de datos.
-		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
-		 * @throws Exception - Cualquier error que no corresponda a la base de datos
-		 */
-		public void updateDisponilbes(Menu menu) throws SQLException, Exception {
-
-			String sql = "UPDATE MENU SET ";
-			sql += "DISPONIBLES=" + (menu.getDisponibles()-1);
-			sql += " WHERE IDMENU = " + menu.getId();
+			String sql = "UPDATE CONTABILIDAD SET ";
+			sql += "ID_RESTAURANTE=" + Evento.getIdRestaurante()+ ",";
+			sql += "ID_PRODUCTO=" + Evento.getIdProducto()+ ",";
+			sql += "ID_MENU=" + Evento.getIdMenu()+ ",";
+			sql += "ID_CLIENTE=" + Evento.getIdCliente()+ ",";
+			sql += "ID_USUARIO=" + Evento.getIdUsuario()+ ",";
+			sql += "UNIDADESVENDIDAS=" + Evento.getUnidadesVendidas()+ ",";
+			sql += "INGRESOSGENERADOS=" + Evento.getIngresosGenerados();
+			sql += " WHERE ID = " + Evento.getId();
 
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -213,10 +231,10 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public void deleteMenu(Menu menu) throws SQLException, Exception {
+		public void deleteContabilidad(Contabilidad Evento) throws SQLException, Exception {
 
-			String sql = "DELETE FROM MENU";
-			sql += " WHERE IDMENU = " + menu	.getId();
+			String sql = "DELETE FROM Contabilidad";
+			sql += " WHERE ID = " + Evento.getId();
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -224,7 +242,5 @@ public class DAOTablaMenu
 		}
 		
 	
-		
-	
-	
+
 }

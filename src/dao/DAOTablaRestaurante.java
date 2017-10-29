@@ -80,7 +80,10 @@ public class DAOTablaRestaurante
 				String representante= rs.getString("REPRESENTANTE");
 				String tipo_Comida= rs.getString("TIPO_COMIDA");
 				Long id_Zona=rs.getLong("ID_ZONA");
-				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona));
+				int capacidad=rs.getInt("CAPACIDAD");
+				int maxproductos=rs.getInt("MAX_PRODUC");
+				double ingresos=rs.getDouble("INGRESOS");
+				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona, capacidad, maxproductos, ingresos));
 				
             
 			}
@@ -110,14 +113,17 @@ public class DAOTablaRestaurante
 			if(rs!=null){
 
 			if(rs.next()) {
-				Long id2 = rs.getLong("IDRESTAURANTE");
 				String name = rs.getString("NOMBRERESTAURANTE");
-				String representante = rs.getString("REPRESENTANTE");
-				String tipo_comida = rs.getString("TIPO_COMIDA");
-				Long id_zona = rs.getLong("ID_ZONA");
+				Long id2 = rs.getLong("IDRESTAURANTE");
+				String representante= rs.getString("REPRESENTANTE");
+				String tipo_Comida= rs.getString("TIPO_COMIDA");
+				Long id_Zona=rs.getLong("ID_ZONA");
+				int capacidad=rs.getInt("CAPACIDAD");
+				int maxproductos=rs.getInt("MAX_PRODUC");
+				double ingresos=rs.getDouble("INGRESOS");
 				
 				
-				restaurante = new Restaurante(id2, name, representante, tipo_comida, id_zona);
+				restaurante = new Restaurante(id2, name, representante, tipo_Comida, id_Zona, capacidad, maxproductos, ingresos);
 				
 				
 				
@@ -142,7 +148,10 @@ public class DAOTablaRestaurante
 			sql += "'"+restaurante.getnombre()+"'" + ",";
 			sql += "'"+restaurante.getrepresentante()+"'" + ",";
 			sql += "'"+restaurante.gettipoComida()+"'" + ",";
-			sql += restaurante.getIdZona() +  ")";
+			sql += restaurante.getIdZona() + ",";
+			sql += restaurante.getCapacidad() + ",";
+			sql += restaurante.getMaxproductos() + ",";
+			sql += restaurante.getIngresos() +  ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -164,6 +173,9 @@ public class DAOTablaRestaurante
 			sql += "NOMBRERESTAURANTE='" + restaurante.getnombre() + "',";
 			sql += "REPRESENTANTE='" + restaurante.getrepresentante()+ "',";
 			sql += "TIPO_COMIDA='" + restaurante.gettipoComida()+ "',";
+			sql += "CAPACIDAD=" + restaurante.getCapacidad()+ ",";
+			sql += "MAX_PRODUC=" + restaurante.getMaxproductos()+ ",";
+			sql += "INGRESOS=" + restaurante.getCapacidad()+ ",";
 			sql += "ID_ZONA=" + restaurante.getIdZona();
 			sql += " WHERE IDRESTAURANTE = " + restaurante.getId();
 

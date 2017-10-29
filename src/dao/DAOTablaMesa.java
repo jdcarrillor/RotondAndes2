@@ -5,21 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import vos.Menu;
-import vos.Pedido;
-import vos.Producto;
-import vos.Restaurante;
-import vos.Video;
+import vos.Mesa;
 
-public class DAOTablaMenu 
-{
-	
-	
-	
-			
-	
+public class DAOTablaMesa {
+
 	/**
 	 * Clase DAO que se conecta la base de datos usando JDBC para resolver los requerimientos de la aplicación
 	 * @author Monitores 2017-20
@@ -40,7 +31,7 @@ public class DAOTablaMenu
 		 * Metodo constructor que crea DAOVideo
 		 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 		 */
-		public DAOTablaMenu() {
+		public DAOTablaMesa() {
 			recursos = new ArrayList<Object>();
 		}
 
@@ -75,29 +66,26 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public  ArrayList<Menu> darMenus() throws SQLException, Exception {
-			ArrayList<Menu> menus = new ArrayList<Menu>();
+		public  ArrayList<Mesa> darMesas() throws SQLException, Exception {
+			ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 
-			String sql = "SELECT * FROM MENU";
+			String sql = "SELECT * FROM Mesa";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			ResultSet rs = prepStmt.executeQuery();
 
 			while (rs.next()) {
-				Long id = rs.getLong("IDMENU");
-				double costo = rs.getDouble("COSTO");
-				double precio = rs.getDouble("PRECIOMENU");
-				Long idRestaurante = rs.getLong("ID_RESTAURANTEMENU");
-				Long idPedido= rs.getLong("ID_PEDIDOMENU");
-				int disponibles= rs.getInt("DISPONIBLES");
+				Long id = rs.getLong("ID");
+				Long idPedidoMesa = rs.getLong("ID_PEDIDOMESA");
+			
 				
 				
-				menus.add(new Menu(id, costo, precio, idRestaurante, idPedido, disponibles));
+				mesas.add(new Mesa(id, idPedidoMesa));
 				
             
 			}
-			return menus;
+			return mesas;
 		}
 		
 		
@@ -109,29 +97,25 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public Menu buscarMenuPorId(Long id) throws SQLException, Exception 
+		public Mesa buscarMesaPorId(Long id) throws SQLException, Exception 
 		{
-			Menu menu= null;
+			Mesa mesa= null;
 
-			String sql = "SELECT * FROM MENU WHERE IDMENU =" + id;
+			String sql = "SELECT * FROM Mesa WHERE ID =" + id;
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			ResultSet rs = prepStmt.executeQuery();
 
 			if(rs.next()) {
-				Long id2 = rs.getLong("IDMENU");
-				double costo = rs.getDouble("COSTO");
-				double precio = rs.getDouble("PRECIOMENU");
-				Long idRestaurante = rs.getLong("ID_RESTAURANTEMENU");
-				Long idPedido= rs.getLong("ID_PEDIDOMENU");
-				int disponibles= rs.getInt("DISPONIBLES");
+				Long id2 = rs.getLong("ID");
+				Long idPedidoMesa = rs.getLong("ID_PEDIDOMESA");
 				
-				menu=(new Menu(id2, costo, precio, idRestaurante, idPedido, disponibles));
+				mesa=(new Mesa(id2, idPedidoMesa));
 				
 			}
 
-			return menu;
+			return mesa;
 		}
 		
 		
@@ -143,15 +127,11 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public void addMenu(Menu menu) throws SQLException, Exception {
+		public void addMesa(Mesa mesa) throws SQLException, Exception {
 
-			String sql = "INSERT INTO MENU VALUES (";
-			sql += menu.getId() + ",";
-			sql += menu.getcosto()+ ",";
-			sql += menu.getprecio()+ ",";
-			sql += menu.getId_restaurante()+ ","; 
-			sql += menu.getId_pedido() + ","; 
-			sql += menu.getDisponibles() + ")";
+			String sql = "INSERT INTO Mesa VALUES (";
+			sql += mesa.getId() + ",";
+			sql += mesa.getIdPedidoMesa()+ ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -160,50 +140,10 @@ public class DAOTablaMenu
 		}
 		
 		
-		/**
-		 * Metodo que actualiza el video que entra como parametro en la base de datos.
-		 * @param video - el video a actualizar. video !=  null
-		 * <b> post: </b> se ha actualizado el video en la base de datos en la transaction actual. pendiente que el video master
-		 * haga commit para que los cambios bajen a la base de datos.
-		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
-		 * @throws Exception - Cualquier error que no corresponda a la base de datos
-		 */
-		public void updateMenu(Menu menu) throws SQLException, Exception {
-
-			String sql = "UPDATE MENU SET ";
-			sql += "COSTO=" + menu.getcosto()+ ",";
-			sql += "PRECIOMENU=" + menu.getprecio()+ ",";
-			sql += "ID_RESTAURANTEMENU=" + menu.getId_restaurante()+ ",";
-			sql += "ID_PEDIDOMENU=" + menu.getId_pedido();
-			sql += "DISPONIBLES=" + menu.getDisponibles();
-			sql += " WHERE IDMENU = " + menu.getId();
-
-
-			PreparedStatement prepStmt = conn.prepareStatement(sql);
-			recursos.add(prepStmt);
-			prepStmt.executeQuery();
-		}
+	
 		
 		
-		/**
-		 * Metodo que actualiza el video que entra como parametro en la base de datos.
-		 * @param video - el video a actualizar. video !=  null
-		 * <b> post: </b> se ha actualizado el video en la base de datos en la transaction actual. pendiente que el video master
-		 * haga commit para que los cambios bajen a la base de datos.
-		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
-		 * @throws Exception - Cualquier error que no corresponda a la base de datos
-		 */
-		public void updateDisponilbes(Menu menu) throws SQLException, Exception {
-
-			String sql = "UPDATE MENU SET ";
-			sql += "DISPONIBLES=" + (menu.getDisponibles()-1);
-			sql += " WHERE IDMENU = " + menu.getId();
-
-
-			PreparedStatement prepStmt = conn.prepareStatement(sql);
-			recursos.add(prepStmt);
-			prepStmt.executeQuery();
-		}
+	
 
 		/**
 		 * Metodo que elimina el video que entra como parametro en la base de datos.
@@ -213,18 +153,15 @@ public class DAOTablaMenu
 		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public void deleteMenu(Menu menu) throws SQLException, Exception {
+		public void deleteMesa(Mesa mesa) throws SQLException, Exception {
 
-			String sql = "DELETE FROM MENU";
-			sql += " WHERE IDMENU = " + menu	.getId();
+			String sql = "DELETE FROM MESA";
+			sql += " WHERE ID = " + mesa.getId();
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			prepStmt.executeQuery();
 		}
 		
-	
-		
-	
-	
+
 }

@@ -229,4 +229,6 @@ public class DAOTablaProducto {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	
 }

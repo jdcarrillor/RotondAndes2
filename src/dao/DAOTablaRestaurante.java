@@ -75,12 +75,15 @@ public class DAOTablaRestaurante
 			ResultSet rs = prepStmt.executeQuery();
 
 			while (rs.next()) {
-				String name = rs.getString("NOMBRE");
-				Long id = rs.getLong("ID");
+				String name = rs.getString("NOMBRERESTAURANTE");
+				Long id = rs.getLong("IDRESTAURANTE");
 				String representante= rs.getString("REPRESENTANTE");
 				String tipo_Comida= rs.getString("TIPO_COMIDA");
 				Long id_Zona=rs.getLong("ID_ZONA");
-				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona));
+				Integer capacidad = rs.getInt("CAPACIDAD");
+				Integer maxprod= rs.getInt("MAX_PRODUC");
+				Long ingresos = rs.getLong("INGRESOS");
+				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona,capacidad, maxprod, ingresos));
 				
             
 			}
@@ -102,7 +105,7 @@ public class DAOTablaRestaurante
 		{
 			Restaurante restaurante = null;
 
-			String sql = "SELECT * FROM RESTAURANTE WHERE ID =" + id;
+			String sql = "SELECT * FROM RESTAURANTE WHERE IDRESTAURANTE =" + id;
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -115,9 +118,11 @@ public class DAOTablaRestaurante
 				String representante = rs.getString("REPRESENTANTE");
 				String tipo_comida = rs.getString("TIPO_COMIDA");
 				Long id_zona = rs.getLong("ID_ZONA");
+				Integer capacidad = rs.getInt("CAPACIDAD");
+				Integer maxprod= rs.getInt("MAX_PRODUC");
+				Long ingresos = rs.getLong("INGRESOS");
 				
-				
-				restaurante = new Restaurante(id2, name, representante, tipo_comida, id_zona);
+				restaurante = new Restaurante(id2, name, representante, tipo_comida, id_zona, capacidad, maxprod, ingresos);
 				
 				
 				
@@ -142,7 +147,10 @@ public class DAOTablaRestaurante
 			sql += "'"+restaurante.getnombre()+"'" + ",";
 			sql += "'"+restaurante.getrepresentante()+"'" + ",";
 			sql += "'"+restaurante.gettipoComida()+"'" + ",";
-			sql += restaurante.getIdZona() +  ")";
+			sql += restaurante.getIdZona() +  ",";
+			sql += restaurante.getCapacidad() + ",";
+			sql += restaurante.getMaxProduc() + ",";
+			sql += restaurante.getIngresos() + ")";
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -164,8 +172,11 @@ public class DAOTablaRestaurante
 			sql += "NOMBRE='" + restaurante.getnombre() + "',";
 			sql += "REPRESENTANTE='" + restaurante.getrepresentante()+ "',";
 			sql += "TIPO_COMIDA='" + restaurante.gettipoComida()+ "',";
-			sql += "ID_ZONA=" + restaurante.getIdZona();
-			sql += " WHERE ID = " + restaurante.getId();
+			sql += "ID_ZONA=" + restaurante.getIdZona() + ",";
+			sql += "CAPACIDAD" + restaurante.getCapacidad() + ",";
+			sql += "MAX_PRODUC" + restaurante.getMaxProduc() + ",";
+			sql += "INGRESOS" + restaurante.getIngresos();
+			sql += " WHERE IDRESTAURANTE = " + restaurante.getId();
 
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -184,11 +195,15 @@ public class DAOTablaRestaurante
 		public void deleteRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
 			String sql = "DELETE FROM RESTAURANTE";
-			sql += " WHERE ID = " + restaurante.getId();
+			sql += " WHERE IDRESTAURANTE = " + restaurante.getId();
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			prepStmt.executeQuery();
+		}
+		
+		public void surtirRestaurante()throws SQLException, Exception{
+			
 		}
 
 	}

@@ -63,7 +63,16 @@ public class DAOTablaPedidoProducto {
 		}
 
 
-		
+		public void registrarPedido(Pedido ped, Producto prod ) throws SQLException, Exception
+		{
+			String sql = "INSERT INTO PEDIDOPRODUCTO VALUES (";
+			sql += ped.getId() + ",";
+			sql += prod.getId() + ")";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			prepStmt.executeQuery();
+		}
 	
 
 }

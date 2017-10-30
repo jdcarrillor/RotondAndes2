@@ -157,5 +157,12 @@ public class RestauranteServices
 		}
 		return Response.status(200).entity(Restaurante).build();
 	}
-
+/**
+	@POST
+	@Path( "{id: \\d+}" )
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response surtirRestaurante( @PathParam("id") Long id,  ){
+		
+	}
+	*/
 }

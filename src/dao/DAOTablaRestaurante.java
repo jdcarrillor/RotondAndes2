@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import vos.Restaurante;
+import vos.Surtir;
 
 
 public class DAOTablaRestaurante 
@@ -208,7 +209,26 @@ public class DAOTablaRestaurante
 			prepStmt.executeQuery();
 		}
 		
-		public void surtirRestaurante()throws SQLException, Exception{
+		public void surtirRestaurante(Long idRest, Long idProd, int disponibles)throws SQLException, Exception{
+			Surtir s = null;
+			String sql = "SELECT MAX_PRODUC FROM RESTAURANTE WHERE IDRESTAURANTE =" + idRest;
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+			
+			Integer max = rs.getInt("MAX_PRODUC");
+			
+			String sql1 = "SELECT DISPONIBLES FROM PRODUCTO WHERE IDPRODUCTO =" + idProd;
+			
+			PreparedStatement prepStmt1 = conn.prepareStatement(sql1);
+			recursos.add(prepStmt1);
+			ResultSet rs1 = prepStmt1.executeQuery();
+			
+			Integer dispon = rs1.getInt("DISPONIBLES");
+			
+			s = new Surtir(idProd, idRest, max);
+			
 			
 		}
 

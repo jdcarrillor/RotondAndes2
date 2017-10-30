@@ -8,14 +8,18 @@ public class Surtir {
 	@JsonProperty(value="idProducto")
 	private Long idProducto;
 	
+	@JsonProperty(value="idRestaurante")
+	private Long idRestaurante;
+	
 	@JsonProperty(value="maximoRest")
 	private int maximoRest;
 	
 
 
-	public Surtir(@JsonProperty(value="idProducto")Long idProducto,@JsonProperty(value="idPedidoMesa") int maximoRest) 
+	public Surtir(@JsonProperty(value="idProducto")Long idProducto,@JsonProperty(value="idRestaurante")Long idRestaurante,@JsonProperty(value="maximoRest") int maximoRest) 
 	{
 		this.idProducto=idProducto;
+		this.idRestaurante=idRestaurante;
 		this.maximoRest=maximoRest;
 	}
 
@@ -29,6 +33,19 @@ public class Surtir {
 
 	public void setIdProducto(Long idProducto) {
 		this.idProducto = idProducto;
+	}
+
+	
+
+
+	public Long getIdRestaurante() {
+		return idRestaurante;
+	}
+
+
+
+	public void setIdRestaurante(Long idRestaurante) {
+		this.idRestaurante = idRestaurante;
 	}
 
 

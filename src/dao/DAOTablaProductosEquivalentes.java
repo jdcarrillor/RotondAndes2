@@ -84,6 +84,25 @@ public class DAOTablaProductosEquivalentes {
 			}
 			return prodEqui;
 		}
+		
+		
+		public ArrayList<ProductosEquivalentes> darProductosEquivalentesDeUnProducto(Long idProducto) throws SQLException, Exception {
+			ArrayList<ProductosEquivalentes> prodEqui = new ArrayList<ProductosEquivalentes>();
+
+			String sql = "SELECT * FROM ProductosEquivalentes WHERE ID_PRODUCTO1="+ idProducto;
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while (rs.next()) {
+				Long idProducto1 = rs.getLong("ID_PRODUCTO1");
+				Long idProducto2 = rs.getLong("ID_PRODUCTO2");
+				
+				prodEqui.add(new ProductosEquivalentes(idProducto1, idProducto2));
+			}
+			return prodEqui;
+		}
 
 		
 		/**

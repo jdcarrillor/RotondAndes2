@@ -26,12 +26,12 @@ public class Contabilidad {
 	private int unidadesVendidas;
 	
 	@JsonProperty(value="ingresosGenerados")
-	private int ingresosGenerados;
+	private double ingresosGenerados;
 	
 
 	
 	
-	public Contabilidad(@JsonProperty(value="id")Long id, @JsonProperty(value="idRestaurante")Long idRestaurante,@JsonProperty(value="idProducto")Long idProducto,@JsonProperty(value="idMenu")Long idMenu,@JsonProperty(value="idCliente")Long idCliente,@JsonProperty(value="idUsuario")Long idUsuario,@JsonProperty(value="unidadesVendidas")int unidadesVendidas,@JsonProperty(value="ingresosGenerados")int ingresosGenerados) 
+	public Contabilidad(@JsonProperty(value="id")Long id, @JsonProperty(value="idRestaurante")Long idRestaurante,@JsonProperty(value="idProducto")Long idProducto,@JsonProperty(value="idMenu")Long idMenu,@JsonProperty(value="idCliente")Long idCliente,@JsonProperty(value="idUsuario")Long idUsuario,@JsonProperty(value="unidadesVendidas")int unidadesVendidas,@JsonProperty(value="ingresosGenerados")double ingresosGenerados) 
 	{
 		super();
 		this.id=id;
@@ -145,14 +145,14 @@ public class Contabilidad {
 
 
 
-	public int getIngresosGenerados() {
+	public double getIngresosGenerados() {
 		return ingresosGenerados;
 	}
 
 
 
 
-	public void setIngresosGenerados(int ingresosGenerados) {
+	public void setIngresosGenerados(double ingresosGenerados) {
 		this.ingresosGenerados = ingresosGenerados;
 	}
 	

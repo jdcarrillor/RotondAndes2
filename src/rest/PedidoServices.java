@@ -96,6 +96,7 @@ public class PedidoServices {
      * @return Json con el Pedido que agrego o Json con el error que se produjo
      */
 	@POST
+	@Path( "productoEquivalente" )
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addPedido(Pedido Pedido) {
@@ -103,6 +104,21 @@ public class PedidoServices {
 		try {
 			System.out.println("-----------------------------SYS1");
 			tm.addPedido(Pedido);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(Pedido).build();
+	}
+	
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPedidoProducEquiv(Pedido Pedido) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			System.out.println("-----------------------------SYS1");
+			tm.addPedidoProductoEquivalente(Pedido);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}

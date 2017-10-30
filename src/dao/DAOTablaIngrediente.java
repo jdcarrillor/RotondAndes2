@@ -219,6 +219,6 @@ public class DAOTablaIngrediente {
 			prepStmt2.executeQuery();
 		}
 		else
-			throw new Exception("paila");
+			throw new Exception("");
 	}
 }

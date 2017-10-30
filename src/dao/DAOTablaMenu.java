@@ -185,6 +185,29 @@ public class DAOTablaMenu
 		}
 		
 		
+		
+		public int darCantidadVendidas(Long idRestaurante) throws SQLException, Exception {
+
+			int cantidad= 0;
+
+			String sql = "SELECT * FROM MENU WHERE IDRESTAURANTE =" + idRestaurante;
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			if(rs.next()) {
+				cantidad++;
+			}
+
+			return cantidad;
+		}
+		
+		
+		
+		
+		
+		
 		/**
 		 * Metodo que actualiza el video que entra como parametro en la base de datos.
 		 * @param video - el video a actualizar. video !=  null

@@ -37,9 +37,12 @@ public class Producto
 	@JsonProperty(value="menu")
 	private Long menu;
 	
+	@JsonProperty(value="idRestaurante")
+	private Long idRestaurante;
+	
 
 	
-	public Producto(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombreProducto,@JsonProperty(value="costoProduccion")double costoProduccion,@JsonProperty(value="precio")double precio,@JsonProperty(value="tiempo")double tiempo,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccion")String traduccion,@JsonProperty(value="categoria")String categoria,@JsonProperty(value="disponibles")int disponibles, @JsonProperty(value="id_menu")Long menu) {
+	public Producto(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombreProducto,@JsonProperty(value="costoProduccion")double costoProduccion,@JsonProperty(value="precio")double precio,@JsonProperty(value="tiempo")double tiempo,@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="traduccion")String traduccion,@JsonProperty(value="categoria")String categoria,@JsonProperty(value="disponibles")int disponibles, @JsonProperty(value="id_menu")Long menu, @JsonProperty(value="idRestaurante")Long idRestaurante) {
 		super();
 		this.id=id;
 		this.nombreProducto=nombreProducto;
@@ -51,6 +54,7 @@ public class Producto
 		this.categoria = categoria;
 		this.disponibles = disponibles;
 		this.menu = menu;
+		this.idRestaurante= idRestaurante;
 		
 	}
 
@@ -146,6 +150,14 @@ public class Producto
 
 	public void setMenu(Long menu) {
 		this.menu = menu;
+	}
+
+	public Long getIdRestaurante() {
+		return idRestaurante;
+	}
+
+	public void setIdRestaurante(Long idRestaurante) {
+		this.idRestaurante = idRestaurante;
 	}
 
 	

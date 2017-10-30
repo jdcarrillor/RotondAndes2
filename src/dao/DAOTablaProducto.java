@@ -81,7 +81,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu,idRestaurante));
 		}
 		return productos;
 	}
@@ -107,7 +108,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -133,7 +135,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -159,7 +162,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -185,7 +189,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -212,7 +217,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -248,7 +254,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -275,7 +282,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -302,7 +310,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -328,7 +337,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -355,7 +365,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 		}
 		return productos;
 	}
@@ -379,7 +390,7 @@ public class DAOTablaProducto {
 
 		while (rs.next()) {
 			Long id = rs.getLong("IDPRODUCTO");
-			String nombre2 = rs.getString("NOMBRE");
+			String nombrex = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
 			String descripcion = rs.getString("DESCRIPCION");
@@ -388,7 +399,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			productos.add(new Producto(id, nombre2, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			productos.add(new Producto(id, nombrex, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante));
 	
 		}
 
@@ -423,7 +435,8 @@ public class DAOTablaProducto {
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
 			Long menu = rs.getLong("ID_MENUPRODUCTO");
-			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu);
+			Long idRestaurante = rs.getLong("ID_RESTAURANTE");
+			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu, idRestaurante);
 	
 		}
 
@@ -450,7 +463,8 @@ public class DAOTablaProducto {
 		sql += producto.getPrecio() + ",";
 		sql += "'"+producto.getCategoria() + "',";
 		sql += producto.getDisponibles() + ",";
-		sql += producto.getMenu() + ")";
+		sql += producto.getMenu() + ",";
+		sql += producto.getIdRestaurante() + ")";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -477,7 +491,8 @@ public class DAOTablaProducto {
 		sql += "PRECIO=" + producto.getPrecio() + ",";
 		sql += "CATEGORIA='" + producto.getCategoria() + "',";
 		sql += "DISPONIBLES=" + producto.getDisponibles() + ",";
-		sql += "ID_MENUPRODUCTO=" + producto.getMenu();
+		sql += "ID_MENUPRODUCTO=" + producto.getMenu() + ",";
+		sql += "ID_RESTAURANTE=" + producto.getIdRestaurante();
 		sql += " WHERE IDPRODUCTO = " + producto.getId();
 
 

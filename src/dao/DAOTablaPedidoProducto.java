@@ -80,6 +80,23 @@ public class DAOTablaPedidoProducto {
 		return productos;
 	}
 	
+	public ArrayList<PedidoProducto> darProductosVendidos(Long idProducto) throws SQLException, Exception {
+		ArrayList<PedidoProducto> productos = new ArrayList<PedidoProducto>();
+
+		String sql = "SELECT * FROM PEDIDOPRODUCTO WHERE ID_PRODUCTO="+idProducto;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long idProductox = rs.getLong("ID_PRODUCTO");
+			Long idPedido = rs.getLong("ID_PEDIDO");
+			productos.add(new PedidoProducto(idProductox, idPedido));
+		}
+		return productos;
+	}
+	
 	
 	
 	public ArrayList<PedidoProducto> darProductosMasPedido() throws SQLException, Exception {
@@ -482,6 +499,11 @@ public class DAOTablaPedidoProducto {
 		prepStmt.executeQuery();
 
 	}
+	
+	
+	
+	
+	
 	
 	
 	

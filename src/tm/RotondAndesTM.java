@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -2057,6 +2058,8 @@ public class RotondAndesTM
 			}
 		}
 	}
+	
+	
 	
 	
 	
@@ -4401,14 +4404,40 @@ public class RotondAndesTM
 	 * @param video - el video a agregar. video != null
 	 * @throws Exception - cualquier error que se genere agregando el video
 	 */
-	public void addContabilidad(Contabilidad Evento) throws Exception {
-		DAOTablaContabilidad daoEventos = new DAOTablaContabilidad();
+	public void addContabilidad(Contabilidad contabilidad) throws Exception {
+		DAOTablaContabilidad daoContabilidad = new DAOTablaContabilidad();
+		DAOTablaProducto daoProducto = new DAOTablaProducto();
+		DAOTablaMenu daoMenu = new DAOTablaMenu();
+		DAOTablaRestaurante daoRestaurante = new DAOTablaRestaurante();
+		DAOTablaPedidoProducto daoPedidoProducto = new DAOTablaPedidoProducto();
+		
 		try 
 		{
+			
 			//////transaccion
 			this.conn = darConexion();
-			daoEventos.setConn(conn);
-			daoEventos.addContabilidad(Evento);
+			daoContabilidad.setConn(conn);
+			daoProducto.setConn(conn);
+			daoMenu.setConn(conn);
+			daoRestaurante.setConn(conn);
+			daoPedidoProducto.setConn(conn);
+			Long idRes = contabilidad.getIdRestaurante();
+			Long idProd = contabilidad.getIdProducto();
+			Long idMenu = contabilidad.getIdMenu();
+			Restaurante rest = daoRestaurante.buscarRestaurantePorId(idRes);
+			Producto prod = daoProducto.buscarProductoPorId(idProd);
+			Menu menu = daoMenu.buscarMenuPorId(idMenu);
+			ArrayList<PedidoProducto> productosVendidos = daoPedidoProducto.darProductosVendidos(idProd);
+			for (int i = 0; i < productosVendidos.size(); i++)
+			{
+				PedidoProducto actual = productosVendidos.get(i);
+				Long idProductoActual = actual.getIdProducto();
+				Producto productoActual = daoProducto.buscarProductoPorId(idProductoActual);
+				if(productoActual.getMenu().equals(idMenu))			
+				}
+			
+					
+			daoContabilidad.addContabilidad(id);
 			conn.commit();
 
 		} catch (SQLException e) {

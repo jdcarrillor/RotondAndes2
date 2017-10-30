@@ -259,6 +259,18 @@ public class DAOTablaPedidoProducto {
 	public ArrayList<Producto> darProductosoGroupByNombre() throws SQLException, Exception {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 
+<<<<<<< HEAD
+		public void registrarPedido(Pedido ped, Producto prod ) throws SQLException, Exception
+		{
+			String sql = "INSERT INTO PEDIDOPRODUCTO VALUES (";
+			sql += ped.getId() + ",";
+			sql += prod.getId() + ")";
+
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			prepStmt.executeQuery();
+		}
+=======
 		String sql = "SELECT * FROM PRODUCTO GROUP BY NOMBRE";
 		
 
@@ -282,6 +294,7 @@ public class DAOTablaPedidoProducto {
 		return productos;
 	}
 	
+>>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
 	
 	public ArrayList<Producto> darProductosoGroupByCosto() throws SQLException, Exception {
 		ArrayList<Producto> productos = new ArrayList<Producto>();

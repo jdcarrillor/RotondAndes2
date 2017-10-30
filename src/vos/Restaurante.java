@@ -25,6 +25,16 @@ public class Restaurante
 	@JsonProperty(value="capacidad")
 	private int capacidad;
 	
+<<<<<<< HEAD
+	@JsonProperty(value="max_produc")
+	private int maxProduc;
+	
+	@JsonProperty(value="ingresos")
+	private Long ingresos;
+	
+	
+	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="representante")String representante,@JsonProperty(value="tipocomida")String tipo_comida,@JsonProperty(value="idzona")Long id_zona, @JsonProperty(value="capacidad") int capacidad, @JsonProperty(value="max_produc") int maxProduc, @JsonProperty(value="ingresos") Long ingresos ) {
+=======
 	@JsonProperty(value="maxproductos")
 	private int maxproductos;
 	
@@ -34,16 +44,23 @@ public class Restaurante
 		
 	
 	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="representante")String representante,@JsonProperty(value="tipocomida")String tipo_comida,@JsonProperty(value="idzona")Long id_zona,@JsonProperty(value="capacidad")int capacidad,@JsonProperty(value="maxproductos")int maxproductos,@JsonProperty(value="ingresos")double ingresos) {
+>>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
 		super();
 		this.id=id;
 		this.nombre=nombre;
 		this.representante=representante;
 		this.tipocomida=tipo_comida;
 		this.idzona= id_zona;
+<<<<<<< HEAD
+		this.capacidad = capacidad;
+		this.maxProduc=maxProduc;
+		this.ingresos=ingresos;
+=======
 		this.capacidad=capacidad;
 		this.maxproductos=maxproductos;
 		this.ingresos=ingresos;
 				
+>>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
 		
 	}
 	public Restaurante()
@@ -115,6 +132,21 @@ public int getCapacidad() {
 public void setCapacidad(int capacidad) {
 	this.capacidad = capacidad;
 }
+<<<<<<< HEAD
+public int getMaxProduc() {
+	return maxProduc;
+}
+public void setMaxProduc(int maxProduc) {
+	this.maxProduc = maxProduc;
+}
+public Long getIngresos() {
+	return ingresos;
+}
+public void setIngresos(Long ingresos) {
+	this.ingresos = ingresos;
+}
+
+=======
 public int getMaxproductos() {
 	return maxproductos;
 }
@@ -127,6 +159,7 @@ public double getIngresos() {
 public void setIngresos(double ingresos) {
 	this.ingresos = ingresos;
 }
+>>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
 
 
 

@@ -15,6 +15,7 @@ import dao.DAOTablaCliente;
 import dao.DAOTablaContabilidad;
 import dao.DAOTablaEvento;
 import dao.DAOTablaIngrediente;
+import dao.DAOTablaIngredientesEquivalentes;
 import dao.DAOTablaMenu;
 import dao.DAOTablaMesa;
 import dao.DAOTablaPedido;
@@ -4542,6 +4543,43 @@ public class RotondAndesTM
 			}
 		}
 	}
+	
+
+	public void addIngredientesEquivalentes(Ingrediente ing1, Ingrediente ing2) throws Exception {
+		DAOTablaIngredientesEquivalentes daoIngredientesEq = new DAOTablaIngredientesEquivalentes();
+		try 
+		{
+			//////transaccion - ACID Example
+			this.conn = darConexion();
+			conn.setAutoCommit(false);
+			daoIngredientesEq.setConn(conn);
+			daoIngredientesEq.setIngredientes(ing1, ing2);
+			
+			conn.commit();
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} finally {
+			try {
+				daoIngredientesEq.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
+
 
 	/**
 	 * Metodo que modela la transaccion que elimina el video que entra como parametro a la base de datos.

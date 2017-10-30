@@ -80,17 +80,10 @@ public class DAOTablaRestaurante
 				String representante= rs.getString("REPRESENTANTE");
 				String tipo_Comida= rs.getString("TIPO_COMIDA");
 				Long id_Zona=rs.getLong("ID_ZONA");
-<<<<<<< HEAD
-				Integer capacidad = rs.getInt("CAPACIDAD");
-				Integer maxprod= rs.getInt("MAX_PRODUC");
-				Long ingresos = rs.getLong("INGRESOS");
-				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona,capacidad, maxprod, ingresos));
-=======
 				int capacidad=rs.getInt("CAPACIDAD");
 				int maxproductos=rs.getInt("MAX_PRODUC");
 				double ingresos=rs.getDouble("INGRESOS");
 				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona, capacidad, maxproductos, ingresos));
->>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
 				
             
 			}
@@ -120,18 +113,8 @@ public class DAOTablaRestaurante
 			if(rs!=null){
 
 			if(rs.next()) {
-<<<<<<< HEAD
-				Long id2 = rs.getLong("ID");
-				String name = rs.getString("NOMBRE");
-				String representante = rs.getString("REPRESENTANTE");
-				String tipo_comida = rs.getString("TIPO_COMIDA");
-				Long id_zona = rs.getLong("ID_ZONA");
-				Integer capacidad = rs.getInt("CAPACIDAD");
-				Integer maxprod= rs.getInt("MAX_PRODUC");
-				Long ingresos = rs.getLong("INGRESOS");
+
 				
-				restaurante = new Restaurante(id2, name, representante, tipo_comida, id_zona, capacidad, maxprod, ingresos);
-=======
 				String name = rs.getString("NOMBRERESTAURANTE");
 				Long id2 = rs.getLong("IDRESTAURANTE");
 				String representante= rs.getString("REPRESENTANTE");
@@ -143,7 +126,7 @@ public class DAOTablaRestaurante
 				
 				
 				restaurante = new Restaurante(id2, name, representante, tipo_Comida, id_Zona, capacidad, maxproductos, ingresos);
->>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
+
 				
 				
 				
@@ -168,17 +151,11 @@ public class DAOTablaRestaurante
 			sql += "'"+restaurante.getnombre()+"'" + ",";
 			sql += "'"+restaurante.getrepresentante()+"'" + ",";
 			sql += "'"+restaurante.gettipoComida()+"'" + ",";
-<<<<<<< HEAD
-			sql += restaurante.getIdZona() +  ",";
-			sql += restaurante.getCapacidad() + ",";
-			sql += restaurante.getMaxProduc() + ",";
-			sql += restaurante.getIngresos() + ")";
-=======
 			sql += restaurante.getIdZona() + ",";
 			sql += restaurante.getCapacidad() + ",";
 			sql += restaurante.getMaxproductos() + ",";
 			sql += restaurante.getIngresos() +  ")";
->>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
+
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -200,17 +177,11 @@ public class DAOTablaRestaurante
 			sql += "NOMBRERESTAURANTE='" + restaurante.getnombre() + "',";
 			sql += "REPRESENTANTE='" + restaurante.getrepresentante()+ "',";
 			sql += "TIPO_COMIDA='" + restaurante.gettipoComida()+ "',";
-<<<<<<< HEAD
-			sql += "ID_ZONA=" + restaurante.getIdZona() + ",";
-			sql += "CAPACIDAD" + restaurante.getCapacidad() + ",";
-			sql += "MAX_PRODUC" + restaurante.getMaxProduc() + ",";
-			sql += "INGRESOS" + restaurante.getIngresos();
-=======
+
 			sql += "CAPACIDAD=" + restaurante.getCapacidad()+ ",";
 			sql += "MAX_PRODUC=" + restaurante.getMaxproductos()+ ",";
 			sql += "INGRESOS=" + restaurante.getCapacidad()+ ",";
 			sql += "ID_ZONA=" + restaurante.getIdZona();
->>>>>>> d4994593116cea66631c0950e0a94a33cbe30aa0
 			sql += " WHERE IDRESTAURANTE = " + restaurante.getId();
 
 

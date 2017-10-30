@@ -84,7 +84,7 @@ public class DAOTablaContabilidad {
 				Long idCliente = rs.getLong("ID_CLIENTE");
 				Long idUsuario = rs.getLong("ID_USUARIO");
 				int unidadesVendidas = rs.getInt("UNIDADESVENDIDAS");
-				int ingresosGenerados = rs.getInt("INGRESOSGENERADOS");
+				double ingresosGenerados = rs.getDouble("INGRESOSGENERADOS");
 				
 				
 				eventos.add(new Contabilidad(id, idRestaurante, idProducto, idMenu, idCliente, idUsuario, unidadesVendidas, ingresosGenerados));
@@ -119,7 +119,7 @@ public class DAOTablaContabilidad {
 				Long idCliente = rs.getLong("ID_CLIENTE");
 				Long idUsuario = rs.getLong("ID_USUARIO");
 				int unidadesVendidas = rs.getInt("UNIDADESVENDIDAS");
-				int ingresosGenerados = rs.getInt("INGRESOSGENERADOS");
+				double ingresosGenerados = rs.getDouble("INGRESOSGENERADOS");
 				
 				
 				
@@ -158,7 +158,7 @@ public class DAOTablaContabilidad {
 				Long idCliente = rs.getLong("ID_CLIENTE");
 				Long idUsuario = rs.getLong("ID_USUARIO");
 				int unidadesVendidas = rs.getInt("UNIDADESVENDIDAS");
-				int ingresosGenerados = rs.getInt("INGRESOSGENERADOS");
+				double ingresosGenerados = rs.getDouble("INGRESOSGENERADOS");
 				
 				
 				Evento =new Contabilidad(id, idRestaurante, idProducto, idMenu, idCliente, idUsuario, unidadesVendidas, ingresosGenerados);
@@ -177,17 +177,17 @@ public class DAOTablaContabilidad {
 		 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
-		public void addContabilidad(Long id, Long idRestaurante , Long idProducto, Long idMenu, Long idCliente, Long idUsuario, int unidadesVendidas, int ingresos) throws SQLException, Exception {
+		public void addContabilidad(Contabilidad contabilidad) throws SQLException, Exception {
 			
 			String sql = "INSERT INTO CONTABILIDAD VALUES (";
-			sql += id + ",";
-			sql += idRestaurante+ ",";
-			sql += idProducto+ ",";
-			sql += idMenu+",";
-			sql += idCliente + ",";
-			sql += idUsuario+ ",";
-			sql += unidadesVendidas+ ",";
-			sql += ingresos+ ")";
+			sql += contabilidad.getId() + ",";
+			sql += contabilidad.getIdRestaurante()+ ",";
+			sql += contabilidad.getIdProducto()+ ",";
+			sql += contabilidad.getIdMenu()+",";
+			sql += contabilidad.getIdCliente() + ",";
+			sql += contabilidad.getIdUsuario()+ ",";
+			sql += contabilidad.getUnidadesVendidas()+ ",";
+			sql += contabilidad.getIngresosGenerados()+ ")";
 			
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);

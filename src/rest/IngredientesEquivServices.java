@@ -40,12 +40,8 @@ public class IngredientesEquivServices {
 
 	
 	
-	/**
-     * Metodo que expone servicio REST usando POST que agrega los videos que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/varios
-     * @param videos - videos a agregar. 
-     * @return Json con el video que agrego o Json con el error que se produjo
-     */
+	/*/
+
 	@POST
 	@Path("/varios")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -61,6 +57,6 @@ public class IngredientesEquivServices {
 		return Response.status(200).entity(ing1).build();
 	}
 	
-	
+	/*/
 	 
 }

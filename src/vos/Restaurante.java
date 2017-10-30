@@ -25,13 +25,10 @@ public class Restaurante
 	@JsonProperty(value="capacidad")
 	private int capacidad;
 	
-<<<<<<< HEAD
 
 
 	
 	
-=======
->>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 	@JsonProperty(value="maxproductos")
 	private int maxproductos;
 	
@@ -41,17 +38,13 @@ public class Restaurante
 		
 	
 	public Restaurante(@JsonProperty(value="id")Long id, @JsonProperty(value="nombre")String nombre,@JsonProperty(value="representante")String representante,@JsonProperty(value="tipocomida")String tipo_comida,@JsonProperty(value="idzona")Long id_zona,@JsonProperty(value="capacidad")int capacidad,@JsonProperty(value="maxproductos")int maxproductos,@JsonProperty(value="ingresos")double ingresos) {
-<<<<<<< HEAD
 
-=======
->>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 		super();
 		this.id=id;
 		this.nombre=nombre;
 		this.representante=representante;
 		this.tipocomida=tipo_comida;
 		this.idzona= id_zona;
-<<<<<<< HEAD
 ;		
 		this.capacidad=capacidad;
 		this.maxproductos=maxproductos;
@@ -59,12 +52,6 @@ public class Restaurante
 				
 
 		
-=======
-		this.capacidad=capacidad;
-		this.maxproductos=maxproductos;
-		this.ingresos=ingresos;
-
->>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 	}
 	public Restaurante()
 	{
@@ -135,11 +122,7 @@ public int getCapacidad() {
 public void setCapacidad(int capacidad) {
 	this.capacidad = capacidad;
 }
-<<<<<<< HEAD
  public  int getMaxproductos() {
-=======
-public int getMaxproductos() {
->>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 	return maxproductos;
 }
 public void setMaxproductos(int maxproductos) {
@@ -151,11 +134,8 @@ public double getIngresos() {
 public void setIngresos(double ingresos) {
 	this.ingresos = ingresos;
 }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 
 	
 }

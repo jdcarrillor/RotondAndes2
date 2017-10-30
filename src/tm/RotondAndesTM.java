@@ -4545,8 +4545,7 @@ public class RotondAndesTM
 	}
 	
 
-<<<<<<< HEAD
-=======
+
 	
 	
 
@@ -4586,7 +4585,7 @@ public class RotondAndesTM
 			}
 		}
 	}	
->>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
+
 	
 	
 	

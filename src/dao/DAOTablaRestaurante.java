@@ -80,10 +80,17 @@ public class DAOTablaRestaurante
 				String representante= rs.getString("REPRESENTANTE");
 				String tipo_Comida= rs.getString("TIPO_COMIDA");
 				Long id_Zona=rs.getLong("ID_ZONA");
+<<<<<<< HEAD
 				int capacidad=rs.getInt("CAPACIDAD");
 				int maxproductos=rs.getInt("MAX_PRODUC");
 				double ingresos=rs.getDouble("INGRESOS");
 				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona, capacidad, maxproductos, ingresos));
+=======
+				Integer capacidad = rs.getInt("CAPACIDAD");
+				Integer maxprod= rs.getInt("MAX_PRODUC");
+				Long ingresos = rs.getLong("INGRESOS");
+				restaruantes.add(new Restaurante(id, name, representante, tipo_Comida, id_Zona,capacidad, maxprod, ingresos));
+>>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 				
             
 			}
@@ -113,6 +120,7 @@ public class DAOTablaRestaurante
 			if(rs!=null){
 
 			if(rs.next()) {
+<<<<<<< HEAD
 
 				
 				String name = rs.getString("NOMBRERESTAURANTE");
@@ -127,6 +135,18 @@ public class DAOTablaRestaurante
 				
 				restaurante = new Restaurante(id2, name, representante, tipo_Comida, id_Zona, capacidad, maxproductos, ingresos);
 
+=======
+				Long id2 = rs.getLong("ID");
+				String name = rs.getString("NOMBRE");
+				String representante = rs.getString("REPRESENTANTE");
+				String tipo_comida = rs.getString("TIPO_COMIDA");
+				Long id_zona = rs.getLong("ID_ZONA");
+				Integer capacidad = rs.getInt("CAPACIDAD");
+				Integer maxprod= rs.getInt("MAX_PRODUC");
+				Double ingresos = rs.getDouble("INGRESOS");
+				
+				restaurante = new Restaurante(id2, name, representante, tipo_comida, id_zona, capacidad, maxprod, ingresos);
+>>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 				
 				
 				
@@ -151,11 +171,18 @@ public class DAOTablaRestaurante
 			sql += "'"+restaurante.getnombre()+"'" + ",";
 			sql += "'"+restaurante.getrepresentante()+"'" + ",";
 			sql += "'"+restaurante.gettipoComida()+"'" + ",";
+<<<<<<< HEAD
 			sql += restaurante.getIdZona() + ",";
 			sql += restaurante.getCapacidad() + ",";
 			sql += restaurante.getMaxproductos() + ",";
 			sql += restaurante.getIngresos() +  ")";
 
+=======
+			sql += restaurante.getIdZona() +  ",";
+			sql += restaurante.getCapacidad() + ",";
+			sql += restaurante.getMaxproductos() + ",";
+			sql += restaurante.getIngresos() + ")";
+>>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
@@ -174,14 +201,21 @@ public class DAOTablaRestaurante
 		public void updateRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
 			String sql = "UPDATE RESTAURANTE SET ";
-			sql += "NOMBRERESTAURANTE='" + restaurante.getnombre() + "',";
+			sql += "NOMBRE='" + restaurante.getnombre() + "',";
 			sql += "REPRESENTANTE='" + restaurante.getrepresentante()+ "',";
 			sql += "TIPO_COMIDA='" + restaurante.gettipoComida()+ "',";
+<<<<<<< HEAD
 
 			sql += "CAPACIDAD=" + restaurante.getCapacidad()+ ",";
 			sql += "MAX_PRODUC=" + restaurante.getMaxproductos()+ ",";
 			sql += "INGRESOS=" + restaurante.getCapacidad()+ ",";
 			sql += "ID_ZONA=" + restaurante.getIdZona();
+=======
+			sql += "ID_ZONA=" + restaurante.getIdZona() + ",";
+			sql += "CAPACIDAD" + restaurante.getCapacidad() + ",";
+			sql += "MAX_PRODUC" + restaurante.getMaxproductos() + ",";
+			sql += "INGRESOS" + restaurante.getIngresos();
+>>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 			sql += " WHERE IDRESTAURANTE = " + restaurante.getId();
 
 
@@ -208,8 +242,20 @@ public class DAOTablaRestaurante
 			prepStmt.executeQuery();
 		}
 		
-		public void surtirRestaurante()throws SQLException, Exception{
+		public void surtirRestaurante(Long idRest, Long idProd, int disponibles)throws SQLException, Exception{
+			String sql = "UPDATE PRODUCTO SET";
+			sql += "DISPONIBLES" + disponibles;
+			sql += "WHERE IDPRODUCTO =" + idProd;
 			
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			prepStmt.executeQuery();
+			
+			String sql1 = "SELECT MAX_PRODUC FROM RESTAURANTES WHERE IDRESTAURANTE =" + idRest;
+			
+			PreparedStatement prepStmt1 = conn.prepareStatement(sql1);
+			recursos.add(prepStmt1);
+			prepStmt1.executeQuery();
 		}
 
 	}

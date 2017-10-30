@@ -4545,6 +4545,48 @@ public class RotondAndesTM
 	}
 	
 
+<<<<<<< HEAD
+=======
+	
+	
+
+
+	/**
+	 * Metodo que modela la transaccion que elimina el video que entra como parametro a la base de datos.
+	 * <b> post: </b> se ha eliminado el video que entra como parametro
+	 * @param video - Video a eliminar. video != null
+	 * @throws Exception - cualquier error que se genera actualizando los videos
+	 */
+	public void deleteContabilidad(Contabilidad Evento) throws Exception {
+		DAOTablaContabilidad daoEventos = new DAOTablaContabilidad();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoEventos.setConn(conn);
+			daoEventos.deleteContabilidad(Evento);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoEventos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}	
+>>>>>>> 9770101ea6e6b965aa8c30a80f61b6eae7bd6522
 	
 	
 	

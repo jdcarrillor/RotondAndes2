@@ -79,14 +79,15 @@ public class DAOTablaEvento
 			ResultSet rs = prepStmt.executeQuery();
 
 			while (rs.next()) {
-				Long id = rs.getLong("ID");
-				Date fecha = rs.getDate("FECHA");
+				Long id = rs.getLong("IDEVENTO");
+				Date fecha = rs.getDate("FECHAEVENTO");
 				int numComen= rs.getInt("NUM_COMENSALES");
-				Long idZona = rs.getLong("ID_ZONA");
+				Long idZona = rs.getLong("ID_ZONAEVENTO");
 				Long idUsuarioCliente= rs.getLong("ID_USUARIOCLIENTE");
+				String fechax = fecha.toString();
 				
 				
-				eventos.add(new Evento(id, fecha, numComen, idZona, idUsuarioCliente));
+				eventos.add(new Evento(id, fechax, numComen, idZona, idUsuarioCliente));
 				
             
 			}
@@ -106,21 +107,22 @@ public class DAOTablaEvento
 		{
 			Evento Evento= null;
 
-			String sql = "SELECT * FROM EVENTO WHERE ID =" + id;
+			String sql = "SELECT * FROM EVENTO WHERE IDEVENTO =" + id;
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);
 			ResultSet rs = prepStmt.executeQuery();
 
 			if(rs.next()) {
-				Long id2 = rs.getLong("ID");
-				Date fecha = rs.getDate("FECHA");
+				Long id2 = rs.getLong("IDEVENTO");
+				Date fecha = rs.getDate("FECHAEVENTO");
 				int numComen= rs.getInt("NUM_COMENSALES");
-				Long idZona = rs.getLong("ID_ZONA");
+				Long idZona = rs.getLong("ID_ZONAEVENTO");
 				Long idUsuarioCliente= rs.getLong("ID_USUARIOCLIENTE");
+				String fechax = fecha.toString();
 				
 				
-				Evento =(new Evento(id2, fecha, numComen, idZona, idUsuarioCliente));
+				Evento =(new Evento(id2, fechax, numComen, idZona, idUsuarioCliente));
 				
 			}
 
@@ -137,9 +139,12 @@ public class DAOTablaEvento
 		 * @throws Exception - Cualquier error que no corresponda a la base de datos
 		 */
 		public void addEvento(Evento Evento) throws SQLException, Exception {
-
+			String[] fecha = Evento.getFecha().split("-");
+			String dia = fecha[0];
+			String mes = fecha[1];
+			String anio = fecha[2];
 			String sql = "INSERT INTO EVENTO VALUES (";
-			sql += "'"+Evento.getFecha()+"'"+ ",";
+			sql +="'"+ anio+"-"+mes+"-"+dia+"'"+  ",";
 			sql += Evento.getId() + ",";
 			sql += Evento.getNum_comensales()+ ",";
 			sql += Evento.getId_zona()+ ",";
@@ -163,11 +168,11 @@ public class DAOTablaEvento
 		public void updateEvento(Evento Evento) throws SQLException, Exception {
 
 			String sql = "UPDATE EVENTO SET ";
-			sql += "FECHA='" + Evento.getFecha()+"'"+ ",";
+			sql += "FECHAEVENTO='" + Evento.getFecha()+"'"+ ",";
 			sql += "NUM_COMENSALES=" + Evento.getNum_comensales()+ ",";
-			sql += "ID_ZONA=" + Evento.getId_zona()+ ",";
+			sql += "ID_ZONAEVENTO=" + Evento.getId_zona()+ ",";
 			sql += "ID_USUARIOCLIENTE=" + Evento.getId_usuarioCliente();
-			sql += " WHERE ID = " + Evento.getId();
+			sql += " WHERE IDEVENTO = " + Evento.getId();
 
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -186,7 +191,7 @@ public class DAOTablaEvento
 		public void deleteEvento(Evento Evento) throws SQLException, Exception {
 
 			String sql = "DELETE FROM EVENTO";
-			sql += " WHERE ID = " + Evento.getId();
+			sql += " WHERE IDEVENTO = " + Evento.getId();
 
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
 			recursos.add(prepStmt);

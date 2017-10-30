@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Usuario;
+import vos.UsuarioAdministrador;
+import vos.UsuarioCliente;
 
-public class DAOTablaUsuario {
-	
+public class DAOTablaAdministrador {
 
 	/**
 	 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
@@ -25,7 +25,7 @@ public class DAOTablaUsuario {
 	 * Metodo constructor que crea DAOUsuario
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOTablaUsuario() {
+	public DAOTablaAdministrador() {
 		recursos = new ArrayList<Object>();
 	}
 
@@ -60,21 +60,21 @@ public class DAOTablaUsuario {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Usuario> darUsuarios() throws SQLException, Exception {
-		ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
+	public ArrayList<UsuarioAdministrador> darUsuarios() throws SQLException, Exception {
+		ArrayList<UsuarioAdministrador> Usuarios = new ArrayList<UsuarioAdministrador>();
 
-		String sql = "SELECT * FROM Usuario";
+		String sql = "SELECT * FROM UsuarioAdministrador";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("IDUSUARIO");
-			String nombre = rs.getString("NOMBREUSUARIO");
+			Long id = rs.getLong("IDUSUARIOADMIN");
+			String nombre = rs.getString("NOMBREUSUARIOADMIN");
 			String rol = rs.getString("ROL");
 			String correo = rs.getString("CORREO");
-			Usuarios.add(new Usuario(id, nombre, rol,correo ));
+			Usuarios.add(new UsuarioAdministrador(id, nombre, rol,correo ));
 		}
 		return Usuarios;
 	}
@@ -87,21 +87,21 @@ public class DAOTablaUsuario {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Usuario> buscarUsuariosPorNombre(String nombre) throws SQLException, Exception {
-		ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
+	public ArrayList<UsuarioAdministrador> buscarUsuariosPorNombre(String nombre) throws SQLException, Exception {
+		ArrayList<UsuarioAdministrador> Usuarios = new ArrayList<UsuarioAdministrador>();
 
-		String sql = "SELECT * FROM Usuario WHERE NOMBRE ='" + nombre + "'";;
+		String sql = "SELECT * FROM UsuarioAdministrador WHERE NOMBREUSUARIOADMIN ='" + nombre + "'";;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			String nombre2 = rs.getString("NOMBREUSUARIO");
-			Long id = rs.getLong("IDUSUARIO");
+			String nombre2 = rs.getString("NOMBREUSUARIOADMIN");
+			Long id = rs.getLong("IDUSUARIOADMIN");
 			String rol = rs.getString("ROL");
 			String correo = rs.getString("CORREO");
-			Usuarios.add(new Usuario(id, nombre2, rol, correo));
+			Usuarios.add(new UsuarioAdministrador(id, nombre2, rol, correo));
 		}
 
 		return Usuarios;
@@ -114,22 +114,22 @@ public class DAOTablaUsuario {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public Usuario buscarUsuarioPorId(Long id) throws SQLException, Exception 
+	public UsuarioAdministrador buscarUsuarioPorId(Long id) throws SQLException, Exception 
 	{
-		Usuario Usuario = null;
+		UsuarioAdministrador Usuario = null;
 
-		String sql = "SELECT * FROM Usuario WHERE IDUSUARIO =" + id;
+		String sql = "SELECT * FROM UsuarioAdministrador WHERE IDUSUARIOADMIN =" + id;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			String nombre = rs.getString("NOMBREUSUARIO");
-			Long id2 = rs.getLong("IDUSUARIO");
+			String nombre = rs.getString("NOMBREUSUARIOADMIN");
+			Long id2 = rs.getLong("IDUSUARIOADMIN");
 			String rol = rs.getString("ROL");
 			String correo = rs.getString("CORREO");
-			Usuario = new Usuario(id2, nombre, rol, correo);
+			Usuario = new UsuarioAdministrador(id2, nombre, rol, correo);
 		}
 
 		return Usuario;
@@ -143,9 +143,9 @@ public class DAOTablaUsuario {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el Usuario a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addUsuario(Usuario Usuario) throws SQLException, Exception {
+	public void addUsuario(UsuarioAdministrador Usuario) throws SQLException, Exception {
 
-		String sql = "INSERT INTO Usuario VALUES (";
+		String sql = "INSERT INTO UsuarioAdministrador VALUES (";
 		sql += Usuario.getId() + ",";
 		sql += "'"+ Usuario.getNombre()+"'" + ",";
 		sql += "'"+ Usuario.getRol()+"'" + ",";
@@ -165,12 +165,13 @@ public class DAOTablaUsuario {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el Usuario.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void updateUsuario(Usuario Usuario) throws SQLException, Exception {
+	public void UpdateUsuarioAdministrador(UsuarioAdministrador Usuario) throws SQLException, Exception {
 
-		String sql = "UPDATE Usuario SET ";
-		sql += "NOMBREUSUARIO='" + Usuario.getNombre()+"'"  + ",";
-		sql += "ROL='" + Usuario.getRol()+"'" ;
-		sql += " WHERE IDUSUARIO = " + Usuario.getId();
+		String sql = "UPDATE UsuarioAdministrador SET ";
+		sql += "NOMBREUSUARIOADMIN='" + Usuario.getNombre()+"'"  + ",";
+		sql += "ROL='" + Usuario.getRol()+"'"  + ",";
+		sql += "CORREO='" + Usuario.getCorreo()+"'" ;
+		sql += " WHERE IDUSUARIOADMIN = " + Usuario.getId();
 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -186,14 +187,15 @@ public class DAOTablaUsuario {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el Usuario.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void deleteUsuario(Usuario Usuario) throws SQLException, Exception {
+	public void deleteUsuario(UsuarioAdministrador Usuario) throws SQLException, Exception {
 
-		String sql = "DELETE FROM Usuario";
-		sql += " WHERE IDUSUARIO = " + Usuario.getId();
+		String sql = "DELETE FROM UsuarioAdministrador";
+		sql += " WHERE IDUSUARIOADMIN = " + Usuario.getId();
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+
 
 }

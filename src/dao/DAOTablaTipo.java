@@ -69,8 +69,8 @@ public class DAOTablaTipo {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("ID");
-			String nombre = rs.getString("NOMBRE");
+			Long id = rs.getLong("IDTIPO");
+			String nombre = rs.getString("NOMBRETIPO");
 			tipos.add(new Tipo(id, nombre));
 		}
 		return tipos;
@@ -87,15 +87,15 @@ public class DAOTablaTipo {
 	public ArrayList<Tipo> buscarTiposPorNombre(String nombre) throws SQLException, Exception {
 		ArrayList<Tipo> tipos = new ArrayList<Tipo>();
 
-		String sql = "SELECT * FROM Tipo WHERE NOMBRE ='" + nombre + "'";;
+		String sql = "SELECT * FROM Tipo WHERE NOMBRETIPO ='" + nombre + "'";;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			String nombre2 = rs.getString("NOMBRE");
-			Long id = rs.getLong("ID");
+			String nombre2 = rs.getString("NOMBRETIPO");
+			Long id = rs.getLong("IDTIPO");
 			tipos.add(new Tipo(id, nombre2));
 		}
 
@@ -113,15 +113,15 @@ public class DAOTablaTipo {
 	{
 		Tipo tipo = null;
 
-		String sql = "SELECT * FROM Tipo WHERE ID =" + id;
+		String sql = "SELECT * FROM Tipo WHERE IDTIPO =" + id;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			String nombre = rs.getString("NOMBRE");
-			Long id2 = rs.getLong("ID");
+			String nombre = rs.getString("NOMBRETIPO");
+			Long id2 = rs.getLong("IDTIPO");
 			tipo = new Tipo(id2, nombre);
 		}
 
@@ -159,8 +159,8 @@ public class DAOTablaTipo {
 	public void updateTipo(Tipo Tipo) throws SQLException, Exception {
 
 		String sql = "UPDATE Tipo SET ";
-		sql += "NOMBRE='" + Tipo.getNombre()+"'";
-		sql += " WHERE ID = " + Tipo.getId();
+		sql += "NOMBRETIPO='" + Tipo.getNombre()+"'";
+		sql += " WHERE IDTIPO = " + Tipo.getId();
 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -179,7 +179,7 @@ public class DAOTablaTipo {
 	public void deleteTipo(Tipo tipo) throws SQLException, Exception {
 
 		String sql = "DELETE FROM Tipo";
-		sql += " WHERE ID = " + tipo.getId();
+		sql += " WHERE IDTIPO = " + tipo.getId();
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

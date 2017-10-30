@@ -71,7 +71,7 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			Long id = rs.getLong("ID");
+			Long id = rs.getLong("IDPRODUCTO");
 			String nombre = rs.getString("NOMBRE");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
@@ -80,7 +80,281 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENU");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	public ArrayList<Producto> darProductosoOrderByNombre() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO ORDER BY NOMBRE";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	public ArrayList<Producto> darProductosoOrderByCosto() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO ORDER BY COSTOPRODUCCION";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	public ArrayList<Producto> darProductosoOrderByPrecio() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO ORDER BY PRECIO";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	public ArrayList<Producto> darProductosoOrderByCategoria() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO ORDER BY CATEGORIA";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	
+	public ArrayList<Producto> darProductosoOrderByTiempo() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO ORDER BY TIEMPO";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	
+	
+	
+	/**
+	 * Metodo que, usando la conexión a la base de datos, saca todos los Pedidos de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM PedidoS;
+	 * @return Arraylist con los Pedidos de la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Producto> darProductosoGroupByNombre() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO GROUP BY NOMBRE";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	
+	public ArrayList<Producto> darProductosoGroupByCosto() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO GROUP BY COSTOPRODUCCION";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	
+	public ArrayList<Producto> darProductosoGroupByPrecio() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO GROUP BY PRECIO";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	public ArrayList<Producto> darProductosoGroupByCategoria() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO GROUP BY CATEGORIA";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
+			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
+		}
+		return productos;
+	}
+	
+	
+	public ArrayList<Producto> darProductosoGroupByTiempo() throws SQLException, Exception {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		String sql = "SELECT * FROM PRODUCTO GROUP BY TIEMPO";
+		
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
+			String nombre = rs.getString("NOMBRE");
+			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
+			Double precio = rs.getDouble("PRECIO");
+			String descripcion = rs.getString("DESCRIPCION");
+			String traduccion = rs.getString("TRADUCCION");
+			Double tiempo = rs.getDouble("TIEMPO");
+			String categoria = rs.getString("CATEGORIA");
+			Integer disponibles = rs.getInt("DISPONIBLES");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
 			productos.add(new Producto(id, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 		}
 		return productos;
@@ -104,8 +378,8 @@ public class DAOTablaProducto {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
+			Long id = rs.getLong("IDPRODUCTO");
 			String nombre2 = rs.getString("NOMBRE");
-			Long id = rs.getLong("ID");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
 			String descripcion = rs.getString("DESCRIPCION");
@@ -113,7 +387,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENU");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
 			productos.add(new Producto(id, nombre2, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu));
 	
 		}
@@ -132,15 +406,15 @@ public class DAOTablaProducto {
 	{
 		Producto producto = null;
 
-		String sql = "SELECT * FROM PRODUCTO WHERE ID =" + id;
+		String sql = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO =" + id;
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
+			Long id2 = rs.getLong("IDPRODUCTO");
 			String nombre = rs.getString("NOMBRE");
-			Long id2 = rs.getLong("ID");
 			Double costoProduccion = rs.getDouble("COSTOPRODUCCION");
 			Double precio = rs.getDouble("PRECIO");
 			String descripcion = rs.getString("DESCRIPCION");
@@ -148,7 +422,7 @@ public class DAOTablaProducto {
 			Double tiempo = rs.getDouble("TIEMPO");
 			String categoria = rs.getString("CATEGORIA");
 			Integer disponibles = rs.getInt("DISPONIBLES");
-			Long menu = rs.getLong("ID_MENU");
+			Long menu = rs.getLong("ID_MENUPRODUCTO");
 			producto = new Producto(id2, nombre, costoProduccion, precio, tiempo, descripcion, traduccion, categoria, disponibles, menu);
 	
 		}
@@ -203,8 +477,32 @@ public class DAOTablaProducto {
 		sql += "PRECIO=" + producto.getPrecio() + ",";
 		sql += "CATEGORIA='" + producto.getCategoria() + "',";
 		sql += "DISPONIBLES=" + producto.getDisponibles() + ",";
-		sql += "ID_MENU=" + producto.getMenu();
-		sql += " WHERE ID = " + producto.getId();
+		sql += "ID_MENUPRODUCTO=" + producto.getMenu();
+		sql += " WHERE IDPRODUCTO = " + producto.getId();
+
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+
+	
+	
+	
+	/**
+	 * Metodo que actualiza el Pedido que entra como parametro en la base de datos.
+	 * @param Pedido - el Pedido a actualizar. Pedido !=  null
+	 * <b> post: </b> se ha actualizado el Pedido en la base de datos en la transaction actual. pendiente que el Pedido master
+	 * haga commit para que los cambios bajen a la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el Pedido.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public void updateDisponiblesProd(Producto producto) throws SQLException, Exception {
+
+		String sql = "UPDATE PRODUCTO SET ";
+		
+		sql += "DISPONIBLES=" + (producto.getDisponibles()-1) ;
+		sql += " WHERE IDPRODUCTO = " + producto.getId();
 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -223,7 +521,7 @@ public class DAOTablaProducto {
 	public void deleteProducto(Producto producto) throws SQLException, Exception {
 
 		String sql = "DELETE FROM PRODUCTO";
-		sql += " WHERE ID = " + producto.getId();
+		sql += " WHERE IDPRODUCTO = " + producto.getId();
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);

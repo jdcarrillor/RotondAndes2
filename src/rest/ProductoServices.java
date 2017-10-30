@@ -69,6 +69,22 @@ public class ProductoServices {
      * @return Json con el/los Productos encontrados con el nombre que entra como parametro o json con 
      * el error que se produjo
      */
+	
+	@GET
+	@Path( "fechas/{}" )
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getProductosFechas() {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Producto> Productos;
+		try {
+			Productos = tm.darProductos();
+		} catch (Exception e) {
+	
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(Productos).build();
+	}
+	
 	@GET
 	@Path( "{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
@@ -78,6 +94,185 @@ public class ProductoServices {
 		try
 		{
 			Producto v = tm.buscarProductoPorId( id );
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "OrderByNombre" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosOrderByNombre()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosOrderByNombre();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	@GET
+	@Path( "OrderByCosto" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosOrderByCosto()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosOrderByCosto();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	@GET
+	@Path( "OrderByCategoria" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosOrderByCategoria()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosOrderByCategoria();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "OrderByPrecio" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosOrderByPrecio()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosOrderByPrecio();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	@GET
+	@Path( "OrderByTiempo" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosOrderByTiempo()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosOrderByTiempo();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	
+	
+	@GET
+	@Path( "GroupByNombre" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosGroupByNombre()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosGroupByNombre();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	@GET
+	@Path( "GroupByCosto" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosGroupByCosto()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosGroupByCosto();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	@GET
+	@Path( "GroupByCategoria" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosGroupByCategoria()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosGroupByCategoria();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "GroupByPrecio" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosGroupByPrecio()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosGroupByPrecio();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	
+	@GET
+	@Path( "GroupByTiempo" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosGroupByTiempo()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.darProductosGroupByTiempo();
 			return Response.status( 200 ).entity( v ).build( );			
 		}
 		catch( Exception e )
@@ -96,7 +291,7 @@ public class ProductoServices {
 	@GET
 	@Path( "{nombre}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getProductoName( @QueryParam("nombre") String name) {
+	public Response getProductoName( @PathParam("nombre") String name) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Producto> Productos;
 		try {

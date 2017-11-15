@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import vos.Consumo;
 import vos.Usuario;
 
 public class DAOTablaUsuario {
@@ -194,6 +195,11 @@ public class DAOTablaUsuario {
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
+	}
+	
+	public void consultarConsumo(Consumo consumo) throws SQLException, Exception{
+		
+		
 	}
 
 }

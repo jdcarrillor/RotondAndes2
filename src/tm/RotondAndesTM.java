@@ -1370,6 +1370,7 @@ public class RotondAndesTM
 			daoPedidos.setConn(conn);
 			daoMenu.setConn(conn);
 			daoProducto.setConn(conn);
+			daoProductosEquivalentes.setConn(conn);
 			Long idmenupedido =pedido.getIdMenu();
 			Long idPedido = pedido.getId();
 			System.out.println("------------------------------------IDMENU" +pedido.getIdMenu());
@@ -1448,7 +1449,7 @@ public class RotondAndesTM
 			}
 			
 			
-
+	
 		}
 		
 		catch (SQLException e) {
@@ -1469,6 +1470,9 @@ public class RotondAndesTM
 				daoMenu.cerrarRecursos();
 				daoProducto.cerrarRecursos();
 				daoPedidoProduc.cerrarRecursos();
+				daoProductosEquivalentes.cerrarRecursos();
+				
+				
 				if(this.conn!=null)
 					System.out.println("------------------------------------SYS5");
 					this.conn.close();
@@ -1480,6 +1484,9 @@ public class RotondAndesTM
 		}
 		
 	}
+
+
+	
 
 
 	public void addPedidos(List<Pedido> pedidos) throws Exception {
@@ -4550,6 +4557,7 @@ public class RotondAndesTM
 			daoMenu.setConn(conn);
 			daoRestaurante.setConn(conn);
 			daoPedidoProducto.setConn(conn);
+			daoPedido.setConn(conn);
 			Long idRes = contabilidad.getIdRestaurante();
 			Long idProd = contabilidad.getIdProducto();
 			Long idMenu = contabilidad.getIdMenu();
@@ -4598,6 +4606,7 @@ public class RotondAndesTM
 				daoRestaurante.cerrarRecursos();
 				daoPedido.cerrarRecursos();
 				daoPedidoProducto.cerrarRecursos();
+				
 				if(this.conn!=null)
 					this.conn.close();
 			} catch (SQLException exception) {

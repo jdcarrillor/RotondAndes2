@@ -96,7 +96,6 @@ public class PedidoServices {
      * @return Json con el Pedido que agrego o Json con el error que se produjo
      */
 	@POST
-	@Path( "productoEquivalente" )
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addPedido(Pedido Pedido) {
@@ -112,6 +111,7 @@ public class PedidoServices {
 	
 	
 	@POST
+	@Path( "productoEquivalente" )
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addPedidoProducEquiv(Pedido Pedido) {

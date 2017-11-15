@@ -28,6 +28,7 @@ import dao.DAOTablaRestaurante;
 
 import dao.DAOTablaZona;
 import dao.DAOTablaTipo;
+import vos.Consumo;
 import vos.Contabilidad;
 import vos.Evento;
 
@@ -4739,6 +4740,38 @@ public class RotondAndesTM
 				throw exception;
 			}
 		}
+	}
+
+
+	public void consultarConsumo(Consumo consumo) throws Exception {
+		DAOTablaUsuario daoUsuario= new DAOTablaUsuario();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoUsuario.setConn(conn);
+			daoUsuario.consultarConsumo(consumo);;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoUsuario.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
 	}	
 
 	

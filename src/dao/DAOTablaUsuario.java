@@ -198,8 +198,19 @@ public class DAOTablaUsuario {
 	}
 	
 	public void consultarConsumo(Consumo consumo) throws SQLException, Exception{
+		String sql = "WITH AAA AS (SELECT * FROM USUARIO NATURAL JOIN"
+				+ " (SELECT ID_USUARIO AS IDUSUARIO, ID_PRODUCTO AS IDPRODUCTO, FECHA FROM PEDIDO))"
+				+ " SELECT DISTINCT * FROM AAA NATURAL JOIN (SELECT IDPRODUCTO,NOMBRE AS NOMBREPRODUCTO, ID_RESTAURANTE "
+				+ "FROM PRODUCTO) NATURAL JOIN (SELECT ID_PRODUCTOTIPO AS IDPRODUCTO,ID_TIPOPROD FROM TIPOPRODUCTO) "
+				+ "NATURAL JOIN (SELECT IDTIPO AS ID_TIPOPRODUCTO, NOMBRETIPO FROM TIPO) NATURAL JOIN"
+				+ " (SELECT IDRESTAURANTE AS ID_RESTAURANTE, NOMBRERESTAURANTE FROM RESTAURANTE)"
+				+ " WHERE CORREO = '" + consumo.getCorreo() + "' AND NOMBREPRODUCTO = '" + consumo.getProducto() 
+				+ "' AND NOMBRETIPO = '" + consumo.getTipo() +"' AND NOMBRERESTAURANTE = '" + consumo.getRestaurante()
+				+ "' AND FECHA >= '" + consumo.getFechaIn() + "' AND FECHA <= '" + consumo.getFechaFin() + "'";
 		
-		
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
 	}
 
 }

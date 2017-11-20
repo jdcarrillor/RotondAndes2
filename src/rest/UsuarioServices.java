@@ -202,6 +202,19 @@ public class UsuarioServices {
 		}
 		return Response.status(200).entity(consumo).build();
 	}
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response consultarNoConsumo(Consumo consumo){
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try{
+			tm.consultarNoConsumo(consumo);
+		}catch(Exception e){
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
+	}
 
 
 }

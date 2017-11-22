@@ -23,6 +23,9 @@ public class Pedido
 	@JsonProperty(value="idMenu")
 	private Long idMenu;
 	
+	@JsonProperty(value="numeroRepetidas")
+	private int numeroRepetidas;
+	
 
 
 
@@ -37,6 +40,12 @@ public class Pedido
 		this.idMenu= idMenu;
 	}
 		
+	public Pedido( @JsonProperty(value="idProducto")Long idProducto,  @JsonProperty(value="numeroRepetidas") int numeroRepetidas) {
+		super();
+		
+		this.idProducto=idProducto;
+		this.numeroRepetidas= numeroRepetidas;
+	}
 		
 	
 

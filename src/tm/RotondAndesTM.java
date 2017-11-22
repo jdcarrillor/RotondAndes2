@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -30,7 +31,7 @@ import dao.DAOTablaZona;
 import dao.DAOTablaTipo;
 import vos.Contabilidad;
 import vos.Evento;
-
+import vos.Funcionamiento;
 import dao.DAOTablaUsuario;
 
 import vos.Ingrediente;
@@ -39,6 +40,7 @@ import vos.Mesa;
 import vos.Pedido;
 import vos.PedidoMesa;
 import vos.PedidoProducto;
+import vos.PedidoRestaurante;
 import vos.Preferencia;
 import vos.Producto;
 import vos.ProductosEquivalentes;
@@ -4739,7 +4741,473 @@ public class RotondAndesTM
 				throw exception;
 			}
 		}
-	}	
+	}
+	
+	
+	//////////////////////RNF11////////////////////////////
+	
+	public List<Funcionamiento> darFuncionamiento() throws Exception {
+		List<Pedido> pedidos;
+		List<Funcionamiento> funcionamiento;
+		List<PedidoRestaurante> pedidosRestaurante;
+		
+		DAOTablaPedidoProducto daoPedidoProducto = new DAOTablaPedidoProducto();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoPedidoProducto.setConn(conn);
+			pedidos = daoPedidoProducto.darProductosPedidoFecha();
+			pedidosRestaurante = daoPedidoProducto.darRestaurantesPedidoFecha();
+			int domingo =0;
+			int lunes =1;
+			int martes =2;
+			int miercoles =3;
+			int jueves =4;
+			int viernes =5;
+			int sabado =6;
+			List<Pedido> pedidosD =new ArrayList<Pedido>();
+			List<Pedido> pedidosL =new ArrayList<Pedido>();
+			List<Pedido> pedidosM =new ArrayList<Pedido>();
+			List<Pedido> pedidosMM =new ArrayList<Pedido>();
+			List<Pedido> pedidosJ =new ArrayList<Pedido>();
+			List<Pedido> pedidosV =new ArrayList<Pedido>();
+			List<Pedido> pedidosS =new ArrayList<Pedido>();
+			
+			List<PedidoRestaurante> resD =new ArrayList<PedidoRestaurante>();
+			List<PedidoRestaurante> resL =new ArrayList<PedidoRestaurante>();
+			List<PedidoRestaurante> resM =new ArrayList<PedidoRestaurante>();
+			List<PedidoRestaurante> resMM =new ArrayList<PedidoRestaurante>();
+			List<PedidoRestaurante> resJ =new ArrayList<PedidoRestaurante>();
+			List<PedidoRestaurante> resV =new ArrayList<PedidoRestaurante>();
+			List<PedidoRestaurante> resS =new ArrayList<PedidoRestaurante>();
+			
+			for (int i = 0; i < pedidos.size(); i++)
+			{
+				System.out.println("///////////////////////////////SYS1");
+				Pedido act = pedidos.get(i);
+				String fechaActual = act.getfecha();
+				System.out.println("///////////////////////////////"+ fechaActual);
+				Date fechax = new Date();
+				String[]arr = fechaActual.split("-");
+				String anioF = arr[0];
+				String mesF = arr[1];
+				String diaF = arr[2];
+				int aniox = Integer.parseInt(anioF);
+				int mesx = Integer.parseInt(mesF);
+				int diax = Integer.parseInt(diaF);
+				fechax.setDate(diax);
+				fechax.setMonth(mesx);
+				fechax.setYear(aniox);
+				
+				int dia =fechax.getDay();
+				if (dia==domingo) 
+				{
+					pedidosD.add(act);
+				}
+				else if(dia==lunes)
+				{
+					pedidosL.add(act);
+				}
+				else if(dia==martes)
+				{
+					pedidosM.add(act);
+				}
+				else if(dia==miercoles)
+				{
+					pedidosMM.add(act);
+				}
+				else if(dia==jueves)
+				{
+					pedidosJ.add(act);	
+				}
+				else if(dia==viernes)
+				{
+					pedidosV.add(act);
+				}
+				else if(dia==sabado)
+				{
+					pedidosS.add(act);
+				}
+				
+				
+				
+				
+			}
+			
+			for (int i = 0; i < pedidosRestaurante.size(); i++)
+			{
+				PedidoRestaurante act = pedidosRestaurante.get(i);
+				String fechaActual = act.getFecha();
+				Date fechax = new Date();
+				int dia =fechax.getDay();
+				String[]arr = fechaActual.split("-");
+				String anioF = arr[0];
+				String mesF = arr[1];
+				String diaF = arr[2];
+				int aniox = Integer.parseInt(anioF);
+				int mesx = Integer.parseInt(mesF);
+				int diax = Integer.parseInt(diaF);
+				fechax.setDate(diax);
+				fechax.setMonth(mesx);
+				fechax.setYear(aniox);
+				if (dia==domingo) 
+				{
+					resD.add(act);
+				}
+				else if(dia==lunes)
+				{
+					resL.add(act);
+				}
+				else if(dia==martes)
+				{
+					resM.add(act);
+				}
+				else if(dia==miercoles)
+				{
+					resMM.add(act);
+				}
+				else if(dia==jueves)
+				{
+					resJ.add(act);	
+				}
+				else if(dia==viernes)
+				{
+					resV.add(act);
+				}
+				else if(dia==sabado)
+				{
+					resS.add(act);
+				}
+				
+				
+				
+				
+			}
+			
+			System.out.println("/////////////////////////////////////SYS2");
+			
+		/////////////////////Productos/////////////////////////////////////
+			//Domingo
+			daoPedidoProducto.createTabla1(pedidosD);
+			System.out.println("/////////////////////////////////////SYS4");
+			daoPedidoProducto.insertTabla1(pedidosD);
+			System.out.println("/////////////////////////////////////SYS7");
+			List<Pedido>masPedidosDomingo =daoPedidoProducto.maxTabla1();
+			System.out.println("/////////////////////////////////////SYS10");
+			List<Pedido>menosPedidosDomingo =daoPedidoProducto.minTabla1();
+			System.out.println("/////////////////////////////////////SYS13");
+			daoPedidoProducto.dropTabla1();
+			
+			
+			//Lunes
+			daoPedidoProducto.createTabla1(pedidosL);
+			daoPedidoProducto.insertTabla1(pedidosL);
+			List<Pedido>masPedidosLunes =daoPedidoProducto.maxTabla1();
+			List<Pedido>menosPedidosLunes =daoPedidoProducto.minTabla1();
+			daoPedidoProducto.dropTabla1();
+			//Martes
+			daoPedidoProducto.createTabla1(pedidosM);
+			daoPedidoProducto.insertTabla1(pedidosM);
+			List<Pedido>masPedidosMartes =daoPedidoProducto.maxTabla1();
+			List<Pedido>menosPedidosMartes=daoPedidoProducto.minTabla1();
+			daoPedidoProducto.dropTabla1();
+			//Miercoles
+			daoPedidoProducto.createTabla1(pedidosMM);
+			daoPedidoProducto.insertTabla1(pedidosMM);
+			List<Pedido>masPedidosMiercoles =daoPedidoProducto.maxTabla1();
+			List<Pedido>menosPedidosMiercoles =daoPedidoProducto.minTabla1();
+			daoPedidoProducto.dropTabla1();
+			//Jueves
+			daoPedidoProducto.createTabla1(pedidosJ);
+			daoPedidoProducto.insertTabla1(pedidosJ);
+			List<Pedido>masPedidosJueves =daoPedidoProducto.maxTabla1();
+			List<Pedido>menosPedidosJueves =daoPedidoProducto.minTabla1();
+			daoPedidoProducto.dropTabla1();
+			//Viernes
+			daoPedidoProducto.createTabla1(pedidosV);
+			daoPedidoProducto.insertTabla1(pedidosV);
+			List<Pedido>masPedidosViernes =daoPedidoProducto.maxTabla1();
+			List<Pedido>menosPedidosVierenes =daoPedidoProducto.minTabla1();
+			daoPedidoProducto.dropTabla1();
+			//Sabado
+			daoPedidoProducto.createTabla1(pedidosS);
+			daoPedidoProducto.insertTabla1(pedidosS);
+			List<Pedido>masPedidosSabado =daoPedidoProducto.maxTabla1();
+			List<Pedido>menosPedidosSabado =daoPedidoProducto.minTabla1();
+			daoPedidoProducto.dropTabla1();
+			
+		/////////////////////Restaurantes/////////////////////////////////////
+			//Domingo
+			daoPedidoProducto.createTabla2(resD);
+			daoPedidoProducto.insertTabla2(resD);
+			List<PedidoRestaurante>masFrecDomingo =daoPedidoProducto.maxTabla2();
+			List<PedidoRestaurante>menosFrecDomingo =daoPedidoProducto.minTabla2();
+			daoPedidoProducto.dropTabla2();
+			//Lunes
+			daoPedidoProducto.createTabla2(resL);
+			daoPedidoProducto.insertTabla2(resL);
+			List<PedidoRestaurante>masFrecLunes =daoPedidoProducto.maxTabla2();
+			List<PedidoRestaurante>menosFrecLunes =daoPedidoProducto.minTabla2();
+			daoPedidoProducto.dropTabla2();
+			//Martes
+			daoPedidoProducto.createTabla2(resM);
+			daoPedidoProducto.insertTabla2(resM);
+			List<PedidoRestaurante>masFrecMartes =daoPedidoProducto.maxTabla2();
+			List<PedidoRestaurante>menosFrecMartes =daoPedidoProducto.minTabla2();
+			daoPedidoProducto.dropTabla2();
+			//Miercoles
+			daoPedidoProducto.createTabla2(resMM);
+			daoPedidoProducto.insertTabla2(resMM);
+			List<PedidoRestaurante>masFrecMiercoles =daoPedidoProducto.maxTabla2();
+			List<PedidoRestaurante>menosFrecMiercoles =daoPedidoProducto.minTabla2();
+			daoPedidoProducto.dropTabla2();
+			//Jueves
+			daoPedidoProducto.createTabla2(resJ);
+			daoPedidoProducto.insertTabla2(resJ);
+			List<PedidoRestaurante>masFrecJueves =daoPedidoProducto.maxTabla2();
+			List<PedidoRestaurante>menosFrecJueves=daoPedidoProducto.minTabla2();
+			daoPedidoProducto.dropTabla2();
+			//Viernes
+			daoPedidoProducto.createTabla2(resV);
+			daoPedidoProducto.insertTabla2(resV);
+			List<PedidoRestaurante>masFrecViernes =daoPedidoProducto.maxTabla2();
+			List<PedidoRestaurante>menosFrecViernes=daoPedidoProducto.minTabla2();
+			daoPedidoProducto.dropTabla2();
+			//Sabado
+			daoPedidoProducto.createTabla2(resS);
+			daoPedidoProducto.insertTabla2(resS);
+			List<PedidoRestaurante>masFrecSabado =daoPedidoProducto.maxTabla2();
+			List<PedidoRestaurante>menosFrecSabado=daoPedidoProducto.minTabla2();
+			daoPedidoProducto.dropTabla2();
+			
+			Pedido productoMasPedidoDomingo = null;
+			Pedido productoMenosPedidoDomingo= null;
+			Pedido productoMasPedidoLunes= null;
+			Pedido productoMenosPedidoLunes= null;
+			Pedido productoMasPedidoMartes= null;
+			Pedido productoMenosPedidoMartes= null;
+			Pedido productoMasPedidoMiercoles= null;
+			Pedido productoMenosPedidoMiercoles= null;
+			Pedido productoMasPedidoJueves= null;
+			Pedido productoMenosPedidoJueves= null;
+			Pedido productoMasPedidoViernes= null;
+			Pedido productoMenosPedidoViernes= null;
+			Pedido productoMasPedidoSabado = null;
+			Pedido productoMenosPedidoSabado= null;
+			
+			
+			PedidoRestaurante restauranteMasFrecDom= null;
+			PedidoRestaurante restauranteMenosFrecDom= null;
+			PedidoRestaurante restauranteMasFrecLun= null;
+			PedidoRestaurante restauranteMenosFrecLun= null;
+			PedidoRestaurante restauranteMasFrecMar= null;
+			PedidoRestaurante restauranteMenosFrecMar= null;
+			PedidoRestaurante restauranteMasFrecMier= null;
+			PedidoRestaurante restauranteMenosFrecMier= null;
+			PedidoRestaurante restauranteMasFrecJue= null;
+			PedidoRestaurante restauranteMenosFrecJue= null;
+			PedidoRestaurante restauranteMasFrecVie= null;
+			PedidoRestaurante restauranteMenosFrecVie= null;
+			PedidoRestaurante restauranteMasFrecSab= null;
+			PedidoRestaurante restauranteMenosFrecSab= null;
+			
+			
+			
+
+			
+			if (masPedidosDomingo.size()>0)
+			{
+				 productoMasPedidoDomingo = masPedidosDomingo.get(0);
+			}
+			
+			if (menosPedidosDomingo.size()>0)
+			{
+				 productoMenosPedidoDomingo = menosPedidosDomingo.get(0);
+			}
+			
+			if (masPedidosLunes.size()>0)
+			{
+				 productoMasPedidoLunes = masPedidosLunes.get(0);	
+			}
+			if (menosPedidosLunes.size()>0)
+			{
+				 productoMenosPedidoLunes= menosPedidosLunes.get(0);
+			}
+			if (masPedidosMartes.size()>0)
+			{
+				 productoMasPedidoMartes = masPedidosMartes.get(0);
+			}
+			
+			if (menosPedidosMartes.size()>0)
+			{
+				 productoMenosPedidoMartes = menosPedidosMartes.get(0);
+			}
+			if (masPedidosMiercoles.size()>0)
+			{
+				 productoMasPedidoMiercoles = masPedidosMiercoles.get(0);
+			}
+			if (menosPedidosMiercoles.size()>0)
+			{
+				 productoMenosPedidoMiercoles= menosPedidosMiercoles.get(0);
+			}
+			if (masPedidosJueves.size()>0)
+			{
+				 productoMasPedidoJueves = masPedidosJueves.get(0);
+			}
+			if (menosPedidosJueves.size()>0)
+			{
+				 productoMenosPedidoJueves= menosPedidosJueves.get(0);
+			}
+			if (masPedidosViernes.size()>0)
+			{
+				 productoMasPedidoViernes = masPedidosViernes.get(0);
+			}
+			if (menosPedidosVierenes.size()>0)
+			{
+				 productoMenosPedidoViernes = menosPedidosVierenes.get(0);
+			}
+			if (masPedidosSabado.size()>0)
+			{
+				 productoMasPedidoSabado = masPedidosSabado.get(0);
+			}
+			if (menosPedidosSabado.size()>0)
+			{
+				 productoMenosPedidoSabado= menosPedidosSabado.get(0);
+			}
+			if (masFrecDomingo.size()>0)
+			{
+				 restauranteMasFrecDom = masFrecDomingo.get(0);
+			}
+			if (menosFrecDomingo.size()>0)
+			{
+				 restauranteMenosFrecDom = menosFrecDomingo.get(0);
+			}
+			if (masFrecLunes.size()>0)
+			{
+				 restauranteMasFrecLun = masFrecLunes.get(0);
+			}
+			if (menosFrecLunes.size()>0)
+			{
+				 restauranteMenosFrecLun = menosFrecLunes.get(0);
+			}
+			if (masFrecMartes.size()>0)
+			{
+				 restauranteMasFrecMar = masFrecMartes.get(0);
+			}
+			if (menosFrecMartes.size()>0)
+			{
+				 restauranteMenosFrecMar = menosFrecMartes.get(0);
+			}
+			if (masFrecMiercoles.size()>0)
+			{
+				 restauranteMasFrecMier = masFrecMiercoles.get(0);
+			}
+			if (menosFrecMiercoles.size()>0)
+			{
+				 restauranteMenosFrecMier = menosFrecMiercoles.get(0);
+			}
+			if (masFrecJueves.size()>0)
+			{
+				 restauranteMasFrecJue = masFrecJueves.get(0);
+			}
+			if (menosFrecJueves.size()>0)
+			{
+				 restauranteMenosFrecJue = menosFrecJueves.get(0);
+			}
+			if (masFrecViernes.size()>0)
+			{
+				 restauranteMasFrecVie = masFrecViernes.get(0);
+			}
+			if (menosFrecViernes.size()>0)
+			{
+				 restauranteMenosFrecVie = menosFrecViernes.get(0);
+			}
+			if (masFrecSabado.size()>0)
+			{
+				 restauranteMasFrecSab = masFrecSabado.get(0);
+			}
+			if (menosFrecSabado.size()>0)
+			{
+				 restauranteMenosFrecSab = menosFrecSabado.get(0);
+
+			}
+			funcionamiento = new ArrayList<>();
+
+			if(productoMasPedidoDomingo!=null&&productoMenosPedidoDomingo!=null&&restauranteMasFrecDom!=null&&restauranteMenosFrecDom!=null)
+			{
+				Funcionamiento funcDomingo = new Funcionamiento("Domingo", productoMasPedidoDomingo.getId(), productoMenosPedidoDomingo.getId(), restauranteMasFrecDom.getIdRestaurante(), restauranteMenosFrecDom.getIdRestaurante());
+				funcionamiento.add(funcDomingo);
+			}
+			
+			if(productoMasPedidoLunes!=null&&productoMenosPedidoLunes!=null&&restauranteMasFrecLun!=null&&restauranteMenosFrecLun!=null)
+			{
+				Funcionamiento funcLunes = new Funcionamiento("Lunes", productoMasPedidoLunes.getId(), productoMenosPedidoLunes.getId(), restauranteMasFrecLun.getIdRestaurante(), restauranteMenosFrecLun.getIdRestaurante());
+				funcionamiento.add(funcLunes);
+			}
+			
+			if(productoMasPedidoMartes!=null&&productoMenosPedidoMartes!=null&&restauranteMasFrecMar!=null&&restauranteMenosFrecMar!=null)
+			{
+				Funcionamiento funcMartes = new Funcionamiento("Martes", productoMasPedidoMartes.getId(), productoMenosPedidoMartes.getId(), restauranteMasFrecMar.getIdRestaurante(), restauranteMenosFrecMar.getIdRestaurante());
+				funcionamiento.add(funcMartes);
+			}
+			if(productoMasPedidoMiercoles!=null&&productoMenosPedidoMiercoles!=null&&restauranteMasFrecMier!=null&&restauranteMenosFrecMier!=null)
+			{
+				Funcionamiento funcMiercoles = new Funcionamiento("Miercoles", productoMasPedidoMiercoles.getId(), productoMenosPedidoMiercoles.getId(), restauranteMasFrecMier.getIdRestaurante(), restauranteMenosFrecMier.getIdRestaurante());
+				funcionamiento.add(funcMiercoles);
+			}
+			if(productoMasPedidoJueves!=null&&productoMenosPedidoJueves!=null&&restauranteMasFrecJue!=null&&restauranteMenosFrecJue!=null)
+			{
+				Funcionamiento funcJueves = new Funcionamiento("Jueves", productoMasPedidoJueves.getId(), productoMenosPedidoJueves.getId(), restauranteMasFrecJue.getIdRestaurante(), restauranteMenosFrecJue.getIdRestaurante());
+				funcionamiento.add(funcJueves);
+				
+			}
+			if(productoMasPedidoViernes!=null&&productoMenosPedidoViernes!=null&&restauranteMasFrecVie!=null&&restauranteMenosFrecVie!=null)
+			{
+				Funcionamiento funcViernes = new Funcionamiento("Viernes", productoMasPedidoViernes.getId(), productoMenosPedidoViernes.getId(), restauranteMasFrecVie.getIdRestaurante(), restauranteMenosFrecVie.getIdRestaurante());
+				funcionamiento.add(funcViernes);
+			}
+			if(productoMasPedidoSabado!=null&&productoMenosPedidoSabado!=null&&restauranteMasFrecSab!=null&&restauranteMenosFrecSab!=null)
+			{
+				Funcionamiento funcSabado= new Funcionamiento("Sabado", productoMasPedidoSabado.getId(), productoMenosPedidoSabado.getId(), restauranteMasFrecSab.getIdRestaurante(), restauranteMenosFrecSab.getIdRestaurante());
+				funcionamiento.add(funcSabado);
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPedidoProducto.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return funcionamiento;
+	}
 
 	
 	

@@ -6,8 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import com.sun.glass.ui.Pixels.Format;
 
 import vos.Pedido;
 
@@ -184,5 +187,10 @@ public class DAOTablaPedido {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+
+		
+		
+	
 
 }

@@ -215,7 +215,21 @@ public class UsuarioServices {
 		}
 		return Response.status(200).entity(consumo).build();
 	}
-
+	
+	@GET
+	@Path("/preferidos")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getUsuariosBuenos() {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Usuario> Usuarios;
+		try {
+			Usuarios = tm.darUsuariosClienteBuenos();
+		} catch (Exception e) {
+	
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(Usuarios).build();
+	}
 
 }
 

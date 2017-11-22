@@ -228,5 +228,37 @@ public class DAOTablaUsuario {
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	/**
+	 * Metodo que busca el Usuario con el id que entra como parametro.
+	 * @param id - id del Usuarios a buscar
+	 * @return ArrayList con los Usuarios encontrados
+	 * @throws SQLException - Cualquier error que la base de datos arroje.
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public ArrayList<Usuario> buscarUsuariosFieles() throws SQLException, Exception {
+		ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
+
+		String sql = "SELECT *FROM((SELECT * FROM((SELECT IDPEDIDO, FECHA, ID_USUARIO,PEDIDOPRODUCTO.ID_PRODUCTO,ID_MENU,ID_PEDIDO FROM PEDIDO INNER JOIN PEDIDOPRODUCTO ON PEDIDO.IDPEDIDO= PEDIDOPRODUCTO.ID_PEDIDO)k INNER JOIN USUARIO ON k.ID_USUARIO=USUARIO.IDUSUARIO)WHERE ROL = 'Cliente')j INNER JOIN PRODUCTO ON PRODUCTO.IDPRODUCTO=j.ID_PRODUCTO) WHERE CATEGORIA ='Plato fuerte'";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			String nombre2 = rs.getString("NOMBREUSUARIO");
+			Long id = rs.getLong("IDUSUARIO");
+			String rol = rs.getString("ROL");
+			String correo = rs.getString("CORREO");
+			Usuarios.add(new Usuario(id, nombre2, rol, correo));
+		}
+
+		return Usuarios;
+	}
+	
+	
+	
+	
+	
 
 }

@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 
 import tm.RotondAndesTM;
+import vos.Consumo;
 import vos.Usuario;
 
 @Path("usuarios")
@@ -187,6 +188,32 @@ public class UsuarioServices {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(Usuario).build();
+	}
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response consultarConsumo(Consumo consumo){
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try{
+			tm.consultarConsumo(consumo);
+		}catch(Exception e){
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
+	}
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response consultarNoConsumo(Consumo consumo){
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try{
+			tm.consultarNoConsumo(consumo);
+		}catch(Exception e){
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(consumo).build();
 	}
 
 
